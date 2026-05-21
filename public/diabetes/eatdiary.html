@@ -1,0 +1,462 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Дневник питания | SugarTrack</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="../css/register.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <style>
+        /* ── Day picker ── */
+        .day-picker {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            overflow-x: auto;
+            padding-bottom: 2px;
+            scrollbar-width: none;
+        }
+        .day-picker::-webkit-scrollbar { display: none; }
+
+        .day-btn {
+            flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2px;
+            padding: 8px 14px;
+            border-radius: 12px;
+            border: 1px solid var(--card-border);
+            background: var(--input-bg);
+            color: var(--text-muted);
+            font-size: 12px;
+            font-weight: 600;
+            cursor: default;
+            transition: background .2s, border-color .2s;
+            line-height: 1.2;
+        }
+        .day-btn .day-num {
+            font-size: 17px;
+            font-weight: 800;
+            color: var(--text-main);
+        }
+        .day-btn.active {
+            background: rgba(139,92,246,.15);
+            border-color: rgba(139,92,246,.5);
+            color: var(--accent);
+        }
+        .day-btn.active .day-num { color: var(--accent); }
+
+        /* ── Meal card ── */
+        .meal-card {
+            background: var(--input-bg);
+            border: 1px solid var(--input-border);
+            border-radius: 14px;
+            overflow: hidden;
+        }
+        .meal-card__header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 18px;
+            border-bottom: 1px solid var(--card-border);
+        }
+        .meal-card__title {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+        .meal-card__kcal {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--accent);
+        }
+        .meal-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 11px 18px;
+            border-bottom: 1px solid var(--card-border);
+        }
+        .meal-item:last-child { border-bottom: none; }
+        .meal-item__name {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-main);
+        }
+        .meal-item__detail {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+        .meal-item__kcal {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--text-muted);
+            white-space: nowrap;
+        }
+        .meal-card__add {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 11px 18px;
+            color: var(--text-muted);
+            font-size: 13px;
+            font-weight: 600;
+            cursor: default;
+            border-top: 1px solid var(--card-border);
+        }
+
+        /* ── Water tracker ── */
+        .water-cup {
+            width: 44px;
+            height: 54px;
+            border-radius: 6px 6px 10px 10px;
+            border: 2px solid rgba(139,92,246,.4);
+            background: var(--input-bg);
+            position: relative;
+            overflow: hidden;
+            cursor: default;
+            flex-shrink: 0;
+            transition: border-color .2s;
+        }
+        .water-cup.filled {
+            border-color: var(--accent);
+        }
+        .water-cup.filled::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            height: 70%;
+            background: linear-gradient(180deg, rgba(139,92,246,.45), rgba(139,92,246,.7));
+            border-radius: 0 0 8px 8px;
+        }
+        .water-cup i {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%,-50%);
+            font-size: 18px;
+            color: var(--accent);
+            opacity: .6;
+            z-index: 1;
+        }
+        .water-cup.filled i { opacity: 1; }
+
+        /* ── Calorie bar ── */
+        .cal-bar-wrap {
+            height: 10px;
+            border-radius: 999px;
+            background: var(--input-bg);
+            overflow: hidden;
+        }
+        .cal-bar-fill {
+            height: 100%;
+            border-radius: 999px;
+            background: linear-gradient(90deg, var(--accent), #a78bfa);
+        }
+
+        /* ── Donut chart (CSS-only placeholder) ── */
+        .donut-wrap {
+            position: relative;
+            width: 160px;
+            height: 160px;
+            flex-shrink: 0;
+        }
+        .donut {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            background: conic-gradient(
+                #8b5cf6 0deg 144deg,       /* углеводы 40% */
+                #a78bfa 144deg 230deg,     /* белки 24% */
+                #c4b5fd 230deg 302deg,     /* жиры 20% */
+                #2e3240 302deg 360deg      /* остаток */
+            );
+        }
+        .donut-hole {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%,-50%);
+            width: 96px;
+            height: 96px;
+            border-radius: 50%;
+            background: var(--card-bg);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .donut-hole__val {
+            font-size: 20px;
+            font-weight: 800;
+            color: var(--text-main);
+            line-height: 1;
+        }
+        .donut-hole__label {
+            font-size: 11px;
+            color: var(--text-muted);
+            font-weight: 600;
+            margin-top: 3px;
+        }
+        .legend-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+        /* ── Toast notifications ── */
+        .alert {
+            animation: slideDown 0.3s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translate(-50%, -100%);
+                opacity: 0;
+            }
+            to {
+                transform: translate(-50%, 0);
+                opacity: 1;
+            }
+        }
+        .modal-content {
+            border-radius: 16px;
+        }
+
+        .list-group-item {
+            border-radius: 10px !important;
+            margin-bottom: 8px;
+            transition: all 0.2s;
+        }
+
+        .list-group-item:hover {
+            transform: translateX(4px);
+            border-color: var(--accent) !important;
+        }
+
+        .delete-food-btn {
+            padding: 4px 8px;
+            font-size: 14px;
+            text-decoration: none;
+        }
+
+        .delete-food-btn:hover {
+            color: #dc3545 !important;
+        }
+
+        .search-result-item {
+            cursor: pointer;
+        }
+
+        .spinner-border-sm {
+            width: 1rem;
+            height: 1rem;
+            border-width: 0.15em;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar px-3 px-md-4 py-3 mb-4 dashboard-navbar">
+        <a href="dashboard.html" class="d-flex align-items-center gap-3 text-decoration-none">
+            <div class="brand-icon">D</div>
+            <div>
+                <div class="brand-sup">SugarTrack</div>
+                <div class="brand-name">Дневник питания</div>
+            </div>
+        </a>
+        <div class="d-flex flex-wrap gap-2">
+            <a href="eatdiary.html" class="btn btn-sm nav-pill">
+                <i class="bi bi-journal-text me-1"></i>Дневник питания
+            </a>
+            <a href="measurements.html" class="btn btn-sm nav-pill">
+                <i class="bi bi-activity me-1"></i>Измерения
+            </a>
+            <a href="medicines.html" class="btn btn-sm nav-pill">
+                <i class="bi bi-capsule me-1"></i>Лекарства
+            </a>
+            <a href="profile.html" class="btn btn-sm nav-pill">
+                <i class="bi bi-person me-1"></i>Профиль
+            </a>
+        </div>
+    </nav>
+
+        <main class="container-xxl px-3 px-md-4 pb-5">
+        <div class="card register-card border-0 shadow-lg mb-4">
+            <div class="card-body p-3 p-md-4">
+                <div class="d-flex align-items-center justify-content-between gap-3 mb-3">
+                    <div>
+                        <span class="badge dash-badge mb-1">Журнал</span>
+                        <h2 class="fw-bold mb-0" style="font-size:1.4rem;">Дневник питания</h2>
+                    </div>
+                    <button class="btn btn-primary btn-sm px-3" type="button" id="addMealBtn">
+                        <i class="bi bi-plus-lg me-1"></i>Добавить приём пищи
+                    </button>
+                </div>
+
+                <!-- Day picker -->
+                <div class="day-picker"></div>
+            </div>
+        </div>
+
+        <div class="row g-4">
+
+            <!-- LEFT COLUMN — приёмы пищи -->
+            <div class="col-12 col-xl-8 meals-container">
+                <!-- Здесь будут рендериться приёмы пищи -->
+            </div>
+
+            <!-- RIGHT COLUMN — вода + статистика -->
+            <div class="col-12 col-xl-4 d-flex flex-column gap-4">
+
+                <!-- Вода -->
+                <div class="card register-card border-0 shadow-lg">
+                    <div class="card-body p-4">
+                        <span class="badge dash-badge mb-2">Вода</span>
+                        <h5 class="fw-bold mb-1">Водный баланс</h5>
+                        <p class="mb-3" style="color:var(--text-muted);font-size:.875rem;">
+                            Цель: 2 000 мл · 8 стаканов по 250 мл
+                        </p>
+
+                        <div class="d-flex gap-2 flex-wrap mb-3 water-cups-container">
+                            <!-- Стаканы рендерятся JS -->
+                        </div>
+
+                        <div class="d-flex align-items-center justify-content-between mb-2">
+                            <span style="font-size:13px;color:var(--text-muted);">Выпито</span>
+                            <span style="font-size:13px;font-weight:700;color:var(--text-main);">
+                            <span class="water-amount">0</span> мл
+                            <span style="color:var(--text-muted);font-weight:400;">из 2 000 мл</span>
+                        </span>
+                        </div>
+                        <div class="cal-bar-wrap">
+                            <div class="cal-bar-fill water-progress-bar" style="width:0%;background:linear-gradient(90deg,#6366f1,#8b5cf6);"></div>
+                        </div>
+                        <div class="d-flex justify-content-between mt-1">
+                            <span style="font-size:11px;color:var(--text-muted);">0 мл</span>
+                            <span style="font-size:11px;color:var(--accent);font-weight:700;"><span class="water-percent">0</span>%</span>
+                            <span style="font-size:11px;color:var(--text-muted);">2 000 мл</span>
+                        </div>
+
+                        <button class="btn btn-primary w-100 mt-3" type="button" id="addWaterBtn">
+                            <i class="bi bi-plus-lg me-1"></i>Добавить стакан
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Статистика дня -->
+                <div class="card register-card border-0 shadow-lg">
+                    <div class="card-body p-4">
+                        <span class="badge dash-badge mb-2">Статистика</span>
+                        <h5 class="fw-bold mb-3">Сводка за сегодня</h5>
+
+                        <!-- Калории -->
+                        <div class="mb-4">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <span style="font-size:13px;font-weight:600;color:var(--text-muted);">Калории</span>
+                                <span style="font-size:14px;font-weight:800;color:var(--text-main);">
+                                <span class="total-calories">0</span>
+                                <span style="color:var(--text-muted);font-size:12px;font-weight:500;">/ 2 000 ккал</span>
+                            </span>
+                            </div>
+                            <div class="cal-bar-wrap" style="height:12px;">
+                                <div class="cal-bar-fill cal-progress-bar" style="width:0%;"></div>
+                            </div>
+                            <div class="d-flex justify-content-between mt-1">
+                                <span style="font-size:11px;color:var(--text-muted);">0</span>
+                                <span style="font-size:11px;color:var(--accent);font-weight:700;"><span class="cal-percent">0</span>%</span>
+                                <span style="font-size:11px;color:var(--text-muted);">2 000 ккал</span>
+                            </div>
+                        </div>
+
+                        <!-- Диаграмма БЖУ -->
+                        <div class="mb-3">
+                            <p style="font-size:13px;font-weight:600;color:var(--text-muted);" class="mb-3">Соотношение БЖУ</p>
+                            <div class="d-flex align-items-center gap-4">
+                                <div class="donut-wrap">
+                                    <div class="donut"></div>
+                                    <div class="donut-hole">
+                                        <span class="donut-hole__val total-calories">0</span>
+                                        <span class="donut-hole__label">ккал</span>
+                                    </div>
+                                </div>
+                                <div class="d-flex flex-column gap-2 flex-grow-1">
+                                    <div class="d-flex align-items-center gap-2">
+                                        <span class="legend-dot" style="background:#8b5cf6;"></span>
+                                        <div class="flex-grow-1">
+                                            <div style="font-size:13px;font-weight:600;color:var(--text-main);">Углеводы</div>
+                                            <div style="font-size:12px;color:var(--text-muted);">
+                                                <span class="total-carbs">0</span> г ·
+                                                <span class="carbs-percent">0</span>%
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex align-items-center gap-2">
+                                        <span class="legend-dot" style="background:#a78bfa;"></span>
+                                        <div class="flex-grow-1">
+                                            <div style="font-size:13px;font-weight:600;color:var(--text-main);">Белки</div>
+                                            <div style="font-size:12px;color:var(--text-muted);">
+                                                <span class="total-protein">0</span> г ·
+                                                <span class="protein-percent">0</span>%
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex align-items-center gap-2">
+                                        <span class="legend-dot" style="background:#c4b5fd;"></span>
+                                        <div class="flex-grow-1">
+                                            <div style="font-size:13px;font-weight:600;color:var(--text-main);">Жиры</div>
+                                            <div style="font-size:12px;color:var(--text-muted);">
+                                                <span class="total-fat">0</span> г ·
+                                                <span class="fat-percent">0</span>%
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Мини-карточки БЖУ -->
+                        <div class="row g-2 mt-1">
+                            <div class="col-4">
+                                <div class="dash-stat-card text-center py-3">
+                                    <div class="dash-stat-label">Углеводы</div>
+                                    <div style="font-size:20px;font-weight:800;color:var(--text-main);">
+                                        <span class="total-carbs">0</span> г
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="dash-stat-card text-center py-3">
+                                    <div class="dash-stat-label">Белки</div>
+                                    <div style="font-size:20px;font-weight:800;color:var(--text-main);">
+                                        <span class="total-protein">0</span> г
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="dash-stat-card text-center py-3">
+                                    <div class="dash-stat-label">Жиры</div>
+                                    <div style="font-size:20px;font-weight:800;color:var(--text-main);">
+                                        <span class="total-fat">0</span> г
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- Подключаем Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Подключаем наш скрипт -->
+    <script src="../js/eatdiary.js"></script>
+
+</body>
+</html>
+

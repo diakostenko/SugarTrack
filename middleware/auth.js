@@ -38,7 +38,7 @@ export function requireAuth(req, res, next) {
     try {
         req.user = jwt.verify(token, JWT_SECRET);
         return next();
-    } catch (error) {
+    } catch {
         return res.redirect('/auth/login');
     }
 }
@@ -48,7 +48,6 @@ export function requireUserType(expectedType) {
         if (req.user?.userType !== expectedType) {
             return res.redirect('/auth/login');
         }
-
         return next();
     };
 }

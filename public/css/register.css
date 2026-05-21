@@ -1,0 +1,133 @@
+:root {
+    --page-bg: #17181f;
+    --card-bg: #21242d;
+    --card-border: #2e3240;
+    --text-main: #f3f4f8;
+    --text-muted: #b7bccd;
+    --accent: #8b5cf6;
+    --accent-hover: #7c3aed;
+    --input-bg: #181b23;
+    --input-border: #34384a;
+    --focus-ring: rgba(139, 92, 246, 0.25);
+}
+
+body {
+    min-height: 100vh;
+    background-color: var(--page-bg);
+    color: var(--text-main);
+}
+
+.register-card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 1rem;
+}
+
+.register-card h1,
+.register-card h2,
+.register-card h3,
+.register-card h4,
+.register-card h5,
+.register-card .form-label {
+    color: var(--text-main);
+}
+
+.register-card h1,
+.register-card h2,
+.register-card h3,
+.register-card h4,
+.register-card h5 {
+    font-weight: 800;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.18);
+}
+
+.register-card .form-control,
+.register-card .form-select {
+    background-color: var(--input-bg);
+    border-color: var(--input-border);
+    color: var(--text-main);
+}
+
+.register-card .form-control::placeholder {
+    color: var(--text-muted);
+}
+
+.register-card .form-control:focus,
+.register-card .form-select:focus {
+    background-color: var(--input-bg);
+    border-color: var(--accent);
+    color: var(--text-main);
+    box-shadow: 0 0 0 0.25rem var(--focus-ring);
+}
+
+.register-card .form-select option {
+    background-color: var(--input-bg);
+    color: var(--text-main);
+}
+
+.register-card .btn-primary {
+    background-color: var(--accent);
+    border-color: var(--accent);
+    font-weight: 600;
+}
+
+.register-card .btn-primary:hover,
+.register-card .btn-primary:focus,
+.register-card .btn-primary:active {
+    background-color: var(--accent-hover);
+    border-color: var(--accent-hover);
+}
+
+.feature-panel {
+    background-color: rgba(139, 92, 246, 0.09);
+    border: 1px solid rgba(139, 92, 246, 0.35);
+}
+
+.goals-panel {
+    background-color: rgba(139, 92, 246, 0.12);
+    border: 1px solid rgba(139, 92, 246, 0.4);
+}
+
+.panel-title {
+    color: var(--accent);
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+.register-card .text-secondary {
+    color: var(--text-muted) !important;
+}
+
+/* Стили для чекбокса */
+.register-card .form-check-input {
+    background-color: var(--input-bg);
+    border-color: var(--input-border);
+}
+
+.register-card .form-check-input:checked {
+    background-color: var(--accent);
+    border-color: var(--accent);
+}
+
+.register-card .form-check-input:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 0.25rem var(--focus-ring);
+}
+
+.register-card .form-check-label {
+    color: var(--text-main);
+}
+
+/* Стили для ссылок */
+.register-card a:hover {
+    color: var(--accent-hover) !important;
+}
+
+/* Дополнительные отступы для блока ссылок */
+.register-card .mt-4 p {
+    margin-bottom: 0.75rem;
+}
+
+.register-card .mt-4 p:last-child {
+    margin-bottom: 0;
+}

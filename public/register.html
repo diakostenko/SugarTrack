@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Регистрация | SugarTrack</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/register.css">
+</head>
+<body>
+    <main class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+                <section class="card register-card border-0 shadow-lg">
+                    <div class="card-body p-4 p-md-5">
+                        <h1 class="h3 mb-4 text-center">Регистрация</h1>
+
+                        <form id="registerForm" name="registerForm" class="needs-validation" novalidate>
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Имя</label>
+                                <input type="text" class="form-control" id="name" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="email" class="form-label">E-mail</label>
+                                <input type="email" class="form-control" id="email" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="phone" class="form-label">Телефон</label>
+                                <input type="tel" class="form-control" id="phone" placeholder="+7 (___) ___-__-__" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="birthDate" class="form-label">Дата рождения</label>
+                                <input type="date" class="form-control" id="birthDate" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="password" class="form-label">Пароль</label>
+                                <input type="password" class="form-control" id="password" minlength="10" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="confirmPassword" class="form-label">Подтвердите пароль</label>
+                                <input type="password" class="form-control" id="confirmPassword" minlength="10" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="userType" class="form-label">Выберите ваш вариант</label>
+                                <select class="form-select" id="userType">
+                                    <option value="diabetes">Диабет</option>
+                                    <option value="ed">РПП</option>
+                                </select>
+                            </div>
+
+                            <div id="diabetesFields" class="d-none mb-4 rounded-3 p-4 feature-panel">
+                                <h5 class="mb-3 panel-title">Информация о диабете</h5>
+
+                                <div class="mb-3">
+                                    <label for="diabetesType" class="form-label">Тип диабета</label>
+                                    <select class="form-select" id="diabetesType">
+                                        <option value="">Выберите тип</option>
+                                        <option value="type1">Тип 1</option>
+                                        <option value="type2">Тип 2</option>
+                                        <option value="gestational">Гестационный</option>
+                                    </select>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="diagnosisYear" class="form-label">Год диагностики</label>
+                                    <input type="number" class="form-control" id="diagnosisYear" min="1950" max="2026" placeholder="Например, 2020">
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="insulinUse" class="form-label">Используете инсулин?</label>
+                                    <select class="form-select" id="insulinUse">
+                                        <option value="">Выберите вариант</option>
+                                        <option value="yes">Да</option>
+                                        <option value="no">Нет</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div id="edFields" class="d-none mb-4 rounded-3 p-4 feature-panel">
+                                <h5 class="mb-3 panel-title">Информация о расстройстве</h5>
+
+                                <div class="mb-3">
+                                    <label for="edType" class="form-label">Тип расстройства</label>
+                                    <select class="form-select" id="edType">
+                                        <option value="">Выберите тип</option>
+                                        <option value="anorexia">Анорексия</option>
+                                        <option value="bulimia">Булимия</option>
+                                        <option value="bed">Компульсивное переедание</option>
+                                        <option value="other">Другое</option>
+                                    </select>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="supportLevel" class="form-label">Уровень поддержки</label>
+                                    <select class="form-select" id="supportLevel">
+                                        <option value="">Выберите уровень</option>
+                                        <option value="professional">Под наблюдением специалиста</option>
+                                        <option value="recovery">В процессе восстановления</option>
+                                        <option value="self">Самостоятельная работа</option>
+                                    </select>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="triggerWarnings" class="form-label">Предупреждения о триггерах</label>
+                                    <select class="form-select" id="triggerWarnings">
+                                        <option value="">Выберите вариант</option>
+                                        <option value="yes">Да, показывать предупреждения</option>
+                                        <option value="no">Нет, не нужно</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div id="diabetesGoals" class="d-none mb-4 rounded-3 p-4 goals-panel">
+                                <h5 class="mb-3 panel-title">Ваши цели</h5>
+
+                                <div class="mb-3">
+                                    <label for="targetGlucose" class="form-label">Целевой уровень глюкозы (ммоль/л)</label>
+                                    <input type="number" class="form-control" id="targetGlucose" step="0.1" placeholder="Например, 5.5">
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="hba1cGoal" class="form-label">Целевой HbA1c (%)</label>
+                                    <input type="number" class="form-control" id="hba1cGoal" step="0.1" placeholder="Например, 6.5">
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="weightGoalDiabetes" class="form-label">Целевой вес (кг)</label>
+                                    <input type="number" class="form-control" id="weightGoalDiabetes" step="0.1" placeholder="Необязательно">
+                                </div>
+                            </div>
+
+                            <div id="edGoals" class="d-none mb-4 rounded-3 p-4 goals-panel">
+                                <h5 class="mb-3 panel-title">Ваши цели</h5>
+
+                                <div class="mb-3">
+                                    <label for="emotionalGoal" class="form-label">Эмоциональная цель</label>
+                                    <select class="form-select" id="emotionalGoal">
+                                        <option value="">Выберите цель</option>
+                                        <option value="awareness">Повысить осознанность питания</option>
+                                        <option value="balance">Найти баланс в питании</option>
+                                        <option value="positive">Улучшить отношение к еде</option>
+                                        <option value="control">Контролировать приступы</option>
+                                    </select>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="trackingFrequency" class="form-label">Частота отслеживания эмоций</label>
+                                    <select class="form-select" id="trackingFrequency">
+                                        <option value="">Выберите частоту</option>
+                                        <option value="daily">Ежедневно</option>
+                                        <option value="weekly">Еженедельно</option>
+                                        <option value="asNeeded">По необходимости</option>
+                                    </select>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="supportGoal" class="form-label">Цель поддержки</label>
+                                    <select class="form-select" id="supportGoal">
+                                        <option value="">Выберите цель</option>
+                                        <option value="community">Найти поддержку сообщества</option>
+                                        <option value="self-care">Развить навыки самопомощи</option>
+                                        <option value="recovery">Работать над восстановлением</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary w-100 mt-3">Зарегистрироваться</button>
+                        </form>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <script src="/js/register.js"></script>
+</body>
+</html>

@@ -1,4 +1,3 @@
-// Функция переключения блоков
 function toggleUserTypeFields() {
     const userType = document.getElementById('userType').value;
     const diabetesFields = document.getElementById('diabetesFields');
@@ -19,28 +18,25 @@ function toggleUserTypeFields() {
     }
 }
 
-// Показываем блоки при загрузке страницы (по умолчанию диабет)
 document.addEventListener('DOMContentLoaded', function() {
     toggleUserTypeFields();
 });
 
-// Показываем нужные поля при изменении типа
 document.getElementById('userType').addEventListener('change', toggleUserTypeFields);
 
-// Отправка формы на сервер
 document.getElementById('registerForm').addEventListener('submit', async function(e) {
     e.preventDefault();
 
-    // Собираем основные данные
     const formData = {
         name: document.getElementById('name').value,
         email: document.getElementById('email').value,
+        phone: document.getElementById('phone').value,
+        birthDate: document.getElementById('birthDate').value,
         password: document.getElementById('password').value,
         confirmPassword: document.getElementById('confirmPassword').value,
         userType: document.getElementById('userType').value
     };
 
-    // Собираем дополнительные данные в зависимости от типа пользователя
     if (formData.userType === 'diabetes') {
         formData.diabetesType = document.getElementById('diabetesType').value;
         formData.diagnosisYear = document.getElementById('diagnosisYear').value;
@@ -70,7 +66,6 @@ document.getElementById('registerForm').addEventListener('submit', async functio
 
         if (response.ok) {
             alert(`${data.message} Перенаправление на вход...`);
-            // Редирект на страницу логина
             window.location.href = '/auth/login';
         } else {
             alert(`Ошибка: ${data.message}`);

@@ -1,0 +1,155 @@
+:root {
+    --page-bg: #17181f;
+    --card-bg: #21242d;
+    --card-border: #2e3240;
+    --text-main: #f3f4f8;
+    --text-muted: #b7bccd;
+    --accent: #8b5cf6;
+    --accent-soft: rgba(139, 92, 246, 0.18);
+    --input-bg: #141821;
+    --input-border: #3a3f53;
+}
+
+body {
+    background-color: var(--page-bg);
+    color: var(--text-main);
+}
+
+.nav-pill--active {
+    background-color: rgba(139, 92, 246, 0.22) !important;
+    border-color: rgba(139, 92, 246, 0.45) !important;
+}
+
+.profile-hero {
+    background: linear-gradient(160deg, rgba(139, 92, 246, 0.16), rgba(33, 36, 45, 0.92));
+    border: 1px solid rgba(139, 92, 246, 0.28);
+}
+
+.profile-heading {
+    color: var(--text-main);
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+}
+
+.profile-sub {
+    color: var(--text-muted);
+}
+
+.profile-info-grid {
+    display: grid;
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.profile-info-item {
+    background-color: #1b1e27;
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    padding: 12px 14px;
+}
+
+.profile-info-label {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 4px;
+}
+
+.profile-info-value {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text-main);
+}
+
+/* Специальная карточка для ИМТ */
+.profile-info-item-bmi {
+    background: linear-gradient(135deg, #8b5cf6 0%, #6366f1 100%);
+    border: 1px solid rgba(139, 92, 246, 0.6);
+    box-shadow: 0 8px 24px rgba(139, 92, 246, 0.25);
+}
+
+.profile-info-item-bmi .profile-info-label {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.profile-info-value-bmi {
+    font-size: 28px;
+    font-weight: 800;
+    color: white;
+    margin-bottom: 4px;
+}
+
+.profile-info-bmi-category {
+    font-size: 11px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.85);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.profile-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 14px;
+}
+
+.profile-card-goal {
+    background-color: rgba(139, 92, 246, 0.1);
+    border: 1px solid rgba(139, 92, 246, 0.34);
+    border-radius: 14px;
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.profile-card-label {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.profile-card-value {
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--text-main);
+}
+
+.profile-chip {
+    background-color: var(--accent-soft);
+    border: 1px solid rgba(139, 92, 246, 0.34);
+    color: #d8c8ff;
+    border-radius: 999px;
+    padding: 5px 12px;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.profile-empty {
+    background-color: #1b1e27;
+    border: 1px dashed #3a3f53;
+    border-radius: 12px;
+    color: var(--text-muted);
+    padding: 14px;
+    font-weight: 600;
+}
+
+@media (min-width: 992px) {
+    .profile-info-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+.profile-info-item-bmi-wide {
+    grid-column: span 2;
+}
+
+@media (max-width: 991px) {
+    .profile-info-item-bmi-wide {
+        grid-column: span 1;
+    }
+}
