@@ -389,7 +389,7 @@ router.get('/api/products/popular-gi', async (req, res) => {
 
 router.use(express.static(staticDir));
 
-// ── API маршруты инсулина ──
+// API маршруты инсулина
 
 function getTodayKey() {
 	const now = new Date();
@@ -557,7 +557,7 @@ router.patch('/insulin/:medicineId/doses/:doseIndex/toggle', requireAuth, requir
 	}
 });
 
-// ── API маршруты таблеток ──
+// API маршруты таблеток
 
 function formatPill(pill, dateKey) {
 	const doseState = normalizeDoseState(pill.doseStates?.[dateKey], pill.dosesPerDay);
@@ -1043,9 +1043,9 @@ router.get('/api/dashboard', requireAuth, requireUserType('diabetes'), async (re
 	}
 });
 
-// ═══════════════════════════════════════════════════════
-// HbA1c — Гликированный гемоглобин
-// ═══════════════════════════════════════════════════════
+
+// HbA1c
+
 
 // Добавить замер HbA1c
 router.post('/api/hba1c', requireAuth, requireUserType('diabetes'), async (req, res) => {

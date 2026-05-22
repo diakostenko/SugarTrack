@@ -159,10 +159,10 @@
     height: 160px;
     border-radius: 50%;
     background: conic-gradient(
-        #8b5cf6 0deg 144deg,
-        #a78bfa 144deg 230deg,
-        #c4b5fd 230deg 302deg,
-        #2e3240 302deg 360deg
+            #8b5cf6 0deg 144deg,
+            #a78bfa 144deg 230deg,
+            #c4b5fd 230deg 302deg,
+            #2e3240 302deg 360deg
     );
 }
 .donut-hole {

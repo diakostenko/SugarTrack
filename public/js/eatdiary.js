@@ -346,10 +346,8 @@ class EatDiary {
               </div>
             </div>
 
-            <!-- Результаты поиска -->
             <div id="searchResults" class="mb-3"></div>
 
-            <!-- Форма добавления -->
             <div id="addFoodForm" style="display: none;">
               <div class="card" style="background: var(--input-bg); border-color: var(--card-border);">
                 <div class="card-body">

@@ -201,7 +201,7 @@ class MedicinesPage {
         }
     }
 
-    // ── инсулин ──
+    // инсулин
 
     openInsulinModal() {
         this.resetInsulinForm();
@@ -279,7 +279,7 @@ class MedicinesPage {
         }
     }
 
-    // ── таблетки ──
+    // таблетки
 
     openPillModal() {
         this.resetPillForm();
@@ -346,7 +346,7 @@ class MedicinesPage {
         }
     }
 
-    // ── глюкоза ──
+    // глюкоза
 
     resetGlucoseForm() {
         if (!this.elements.glucoseForm) return;
@@ -394,7 +394,7 @@ class MedicinesPage {
         }
     }
 
-    // ── рендер ──
+    // рендер
 
     render() {
         this.renderInsulinList();

@@ -27,8 +27,7 @@ const userSchema = new Schema({
 	edInfo: {
 		type: {
 			edType: { type: String, enum: ['anorexia', 'bulimia', 'bed', 'other'] },
-			supportLevel: { type: String, enum: ['professional', 'recovery', 'self'] },
-			triggerWarnings: { type: String, enum: ['yes', 'no'] }
+			supportLevel: { type: String, enum: ['professional', 'recovery', 'self'] }
 		},
 		default: null
 	},

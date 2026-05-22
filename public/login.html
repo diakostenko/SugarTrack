@@ -11,46 +11,46 @@
     <link rel="stylesheet" href="/css/register.css">
 </head>
 <body>
-    <main class="container py-5">
-        <div class="row justify-content-center">
-            <div class="col-12 col-md-8 col-lg-6 col-xl-5">
-                <section class="card register-card border-0 shadow-lg">
-                    <div class="card-body p-4 p-md-5">
-                        <h1 class="h3 mb-4 text-center">Вход в систему</h1>
+<main class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+            <section class="card register-card border-0 shadow-lg">
+                <div class="card-body p-4 p-md-5">
+                    <h1 class="h3 mb-4 text-center">Вход в систему</h1>
 
-                        <form id="loginForm" name="loginForm" class="needs-validation" novalidate>
-                            <div class="mb-3">
-                                <label for="email" class="form-label">E-mail</label>
-                                <input type="email" class="form-control" id="email" required placeholder="example@mail.com">
-                            </div>
-
-                            <div class="mb-3">
-                                <label for="password" class="form-label">Пароль</label>
-                                <input type="password" class="form-control" id="password" minlength="10" required placeholder="••••••••••">
-                            </div>
-
-                            <div class="mb-3 form-check">
-                                <input type="checkbox" class="form-check-input" id="rememberMe">
-                                <label class="form-check-label" for="rememberMe">
-                                    Запомнить меня
-                                </label>
-                            </div>
-
-                            <button type="submit" class="btn btn-primary w-100 mt-2">Войти</button>
-                        </form>
-
-                        <div class="mt-4 text-center">
-                            <p class="text-muted">
-                                <a href="/auth/register" class="text-decoration-none" style="color: var(--accent);">Зарегистрироваться</a>
-                            </p>
+                    <form id="loginForm" name="loginForm" class="needs-validation" novalidate>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">E-mail</label>
+                            <input type="email" class="form-control" id="email" required placeholder="example@mail.com">
                         </div>
-                    </div>
-                </section>
-            </div>
-        </div>
-    </main>
 
-    <script src="/js/login.js"></script>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Пароль</label>
+                            <input type="password" class="form-control" id="password" minlength="10" required placeholder="••••••••••">
+                        </div>
+
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="rememberMe">
+                            <label class="form-check-label" for="rememberMe">
+                                Запомнить меня
+                            </label>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary w-100 mt-2">Войти</button>
+                    </form>
+
+                    <div class="mt-4 text-center">
+                        <p class="text-muted">
+                            <a href="/auth/register" class="text-decoration-none" style="color: var(--accent);">Зарегистрироваться</a>
+                        </p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</main>
+
+<script src="/js/login.js"></script>
 </body>
 </html>
 

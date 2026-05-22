@@ -75,7 +75,6 @@ router.post('/', requireAuth, requireUserType('diabetes'), async (req, res) => {
     }
 });
 
-// ДОБАВЬ ЭТОТ РОУТ СЮДА
 // Добавить продукт в приём пищи (с автоматическим созданием приёма)
 router.post('/add-food', requireAuth, requireUserType('diabetes'), async (req, res) => {
     try {

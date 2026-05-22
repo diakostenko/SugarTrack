@@ -13,38 +13,38 @@
 </head>
 <body>
 
-    <!-- ── Navbar ── -->
-    <nav class="navbar px-3 px-md-4 py-3 mb-4 dashboard-navbar">
-        <a href="dashboard.html" class="d-flex align-items-center gap-3 text-decoration-none">
-            <div class="brand-icon">D</div>
-            <div>
-                <div class="brand-sup">SugarTrack</div>
-                <div class="brand-name">Измерения</div>
-            </div>
-        </a>
-        <div class="d-flex flex-wrap gap-2">
-            <a href="eatdiary.html" class="btn btn-sm nav-pill">
-                <i class="bi bi-journal-text me-1"></i>Дневник питания
-            </a>
-            <a href="measurements.html" class="btn btn-sm nav-pill">
-                <i class="bi bi-activity me-1"></i>Измерения
-            </a>
-            <a href="medicines.html" class="btn btn-sm nav-pill">
-                <i class="bi bi-capsule me-1"></i>Лекарства
-            </a>
-            <a href="profile.html" class="btn btn-sm nav-pill">
-                <i class="bi bi-person me-1"></i>Профиль
-            </a>
+<!-- ── Навигация ── -->
+<nav class="navbar px-3 px-md-4 py-3 mb-4 dashboard-navbar">
+    <a href="dashboard.html" class="d-flex align-items-center gap-3 text-decoration-none">
+        <div class="brand-icon">D</div>
+        <div>
+            <div class="brand-sup">SugarTrack</div>
+            <div class="brand-name">Измерения</div>
         </div>
-    </nav>
+    </a>
+    <div class="d-flex flex-wrap gap-2">
+        <a href="eatdiary.html" class="btn btn-sm nav-pill">
+            <i class="bi bi-journal-text me-1"></i>Дневник питания
+        </a>
+        <a href="measurements.html" class="btn btn-sm nav-pill">
+            <i class="bi bi-activity me-1"></i>Измерения
+        </a>
+        <a href="medicines.html" class="btn btn-sm nav-pill">
+            <i class="bi bi-capsule me-1"></i>Лекарства
+        </a>
+        <a href="profile.html" class="btn btn-sm nav-pill">
+            <i class="bi bi-person me-1"></i>Профиль
+        </a>
+    </div>
+</nav>
 
-    <!-- ── HbA1c Button (неприметная кнопка) ── -->
-    <div class="container-xxl px-3 px-md-4">
-        <button
-                type="button"
-                class="btn btn-sm"
-                id="hba1cBtn"
-                style="
+<!-- ── HbA1c ── -->
+<div class="container-xxl px-3 px-md-4">
+    <button
+            type="button"
+            class="btn btn-sm"
+            id="hba1cBtn"
+            style="
             background: rgba(139, 92, 246, 0.1);
             border: 1px solid rgba(139, 92, 246, 0.3);
             color: var(--text-muted);
@@ -54,422 +54,418 @@
             border-radius: 999px;
             margin-bottom: 16px;
         "
-        >
-            <i class="bi bi-clipboard-data me-1"></i>Гликированный гемоглобин (HbA1c)
-        </button>
+    >
+        <i class="bi bi-clipboard-data me-1"></i>Гликированный гемоглобин (HbA1c)
+    </button>
+</div>
+
+<main class="container-xxl px-3 px-md-4 pb-5">
+
+    <!--вес + диаграмма-->
+    <div class="row g-4 mb-4">
+
+        <!-- Ввод веса -->
+        <div class="col-12 col-lg-4">
+            <div class="card register-card border-0 shadow-lg h-100">
+                <div class="card-body p-4">
+                    <span class="badge dash-badge mb-2">Вес</span>
+                    <h5 class="fw-bold mb-1">Текущий вес</h5>
+                    <p class="mb-4" style="color:var(--text-muted);font-size:.875rem;">Введи сегодняшний показатель</p>
+
+                    <div class="d-flex align-items-center gap-3 mb-4">
+                        <input
+                                type="number"
+                                id="weightInput"
+                                class="measure-input"
+                                style="width:120px;font-size:28px;padding:12px 16px;"
+                                value="{{ACTUAL_WEIGHT}}"
+                                step="0.1"
+                        >
+                        <span style="font-size:18px;color:var(--text-muted);font-weight:700;">кг</span>
+                    </div>
+
+                    <button class="btn btn-primary w-100 mb-3" type="button" id="saveWeightBtn">
+                        <i class="bi bi-check2 me-1"></i>Сохранить
+                    </button>
+
+                    <div class="row g-2">
+                        <div class="col-6">
+                            <div class="dash-stat-card text-center py-3">
+                                <div class="dash-stat-label">Минимум</div>
+                                <div style="font-size:20px;font-weight:800;color:var(--text-main);">72.1 кг</div>
+                                <div style="font-size:11px;color:var(--text-muted);">за 30 дней</div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="dash-stat-card text-center py-3">
+                                <div class="dash-stat-label">Максимум</div>
+                                <div style="font-size:20px;font-weight:800;color:var(--text-main);">76.3 кг</div>
+                                <div style="font-size:11px;color:var(--text-muted);">за 30 дней</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Диаграмма веса -->
+        <div class="col-12 col-lg-8">
+            <div class="card register-card border-0 shadow-lg h-100">
+                <div class="card-body p-4">
+                    <div class="d-flex align-items-start justify-content-between gap-3 mb-4">
+                        <div>
+                            <span class="badge dash-badge mb-2">График</span>
+                            <h5 class="fw-bold mb-0">Динамика веса за 2 недели</h5>
+                        </div>
+                    </div>
+
+                    <!-- Chart.js -->
+                    <div style="position: relative; height: 220px;">
+                        <canvas id="weightChart"></canvas>
+                    </div>
+
+                    <div id="weightChartEmpty" style="display:none;text-align:center;padding:60px 20px;color:var(--text-muted);">
+                        <i class="bi bi-graph-down" style="font-size:48px;opacity:0.3;"></i>
+                        <p style="margin-top:12px;font-size:14px;">Нет данных для отображения графика</p>
+                        <p style="font-size:12px;">Сохраните первый замер веса</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 
-    <main class="container-xxl px-3 px-md-4 pb-5">
-
-        <!-- ══════════════════════════════════
-             СТРОКА 1 — вес + диаграмма
-        ══════════════════════════════════ -->
-        <div class="row g-4 mb-4">
-
-            <!-- Ввод веса -->
-            <div class="col-12 col-lg-4">
-                <div class="card register-card border-0 shadow-lg h-100">
-                    <div class="card-body p-4">
-                        <span class="badge dash-badge mb-2">Вес</span>
-                        <h5 class="fw-bold mb-1">Текущий вес</h5>
-                        <p class="mb-4" style="color:var(--text-muted);font-size:.875rem;">Введи сегодняшний показатель</p>
-
-                        <div class="d-flex align-items-center gap-3 mb-4">
-                            <input
-                                    type="number"
-                                    id="weightInput"
-                                    class="measure-input"
-                                    style="width:120px;font-size:28px;padding:12px 16px;"
-                                    value="{{ACTUAL_WEIGHT}}"
-                                    step="0.1"
-                            >
-                            <span style="font-size:18px;color:var(--text-muted);font-weight:700;">кг</span>
-                        </div>
-
-                        <button class="btn btn-primary w-100 mb-3" type="button" id="saveWeightBtn">
-                            <i class="bi bi-check2 me-1"></i>Сохранить
-                        </button>
-
-                        <div class="row g-2">
-                            <div class="col-6">
-                                <div class="dash-stat-card text-center py-3">
-                                    <div class="dash-stat-label">Минимум</div>
-                                    <div style="font-size:20px;font-weight:800;color:var(--text-main);">72.1 кг</div>
-                                    <div style="font-size:11px;color:var(--text-muted);">за 30 дней</div>
-                                </div>
-                            </div>
-                            <div class="col-6">
-                                <div class="dash-stat-card text-center py-3">
-                                    <div class="dash-stat-label">Максимум</div>
-                                    <div style="font-size:20px;font-weight:800;color:var(--text-main);">76.3 кг</div>
-                                    <div style="font-size:11px;color:var(--text-muted);">за 30 дней</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+    <div class="card register-card border-0 shadow-lg mb-4">
+        <div class="card-body p-4">
+            <div class="d-flex align-items-center justify-content-between gap-3 mb-4">
+                <div>
+                    <span class="badge dash-badge mb-2">Антропометрия</span>
+                    <h5 class="fw-bold mb-0">Замеры тела</h5>
                 </div>
+                <button class="btn btn-primary btn-sm px-3" type="button" id="saveMeasurementsBtn">
+                    <i class="bi bi-check2 me-1"></i>Сохранить все
+                </button>
             </div>
 
-            <!-- Диаграмма веса -->
-            <div class="col-12 col-lg-8">
-                <div class="card register-card border-0 shadow-lg h-100">
-                    <div class="card-body p-4">
-                        <div class="d-flex align-items-start justify-content-between gap-3 mb-4">
-                            <div>
-                                <span class="badge dash-badge mb-2">График</span>
-                                <h5 class="fw-bold mb-0">Динамика веса за 2 недели</h5>
-                            </div>
+            <div class="row g-0">
+                <div class="col-12 col-md-6 pe-md-4">
+                    <div class="measure-row">
+                        <div>
+                            <div class="measure-row__label"><i class="bi bi-arrows-expand me-2" style="color:var(--accent)"></i>Рост</div>
+                            <div class="measure-row__sub">Не меняется, для расчёта ИМТ</div>
                         </div>
-
-                        <!-- Chart.js Canvas -->
-                        <div style="position: relative; height: 220px;">
-                            <canvas id="weightChart"></canvas>
+                        <div class="measure-input-wrap">
+                            <input type="number" class="measure-input" id="heightInput" value="{{ACTUAL_HEIGHT}}" step="0.5">
+                            <span class="measure-unit">см</span>
                         </div>
-
-                        <div id="weightChartEmpty" style="display:none;text-align:center;padding:60px 20px;color:var(--text-muted);">
-                            <i class="bi bi-graph-down" style="font-size:48px;opacity:0.3;"></i>
-                            <p style="margin-top:12px;font-size:14px;">Нет данных для отображения графика</p>
-                            <p style="font-size:12px;">Сохраните первый замер веса</p>
+                    </div>
+                    <div class="measure-row">
+                        <div>
+                            <div class="measure-row__label"><i class="bi bi-crop me-2" style="color:var(--accent)"></i>Талия</div>
+                            <div class="measure-row__sub">Норма: до 80 см (женщины)</div>
+                        </div>
+                        <div class="measure-input-wrap">
+                            <input type="number" class="measure-input" id="waistInput" value="{{ACTUAL_WAIST}}" step="0.5">
+                            <span class="measure-unit">см</span>
+                        </div>
+                    </div>
+                    <div class="measure-row">
+                        <div>
+                            <div class="measure-row__label"><i class="bi bi-circle me-2" style="color:var(--accent)"></i>Бёдра</div>
+                            <div class="measure-row__sub">Соотношение талия/бёдра</div>
+                        </div>
+                        <div class="measure-input-wrap">
+                            <input type="number" class="measure-input" id="hipsInput" value="{{ACTUAL_HIPS}}" step="0.5">
+                            <span class="measure-unit">см</span>
                         </div>
                     </div>
                 </div>
-            </div>
-
-        </div>
-
-        <div class="card register-card border-0 shadow-lg mb-4">
-            <div class="card-body p-4">
-                <div class="d-flex align-items-center justify-content-between gap-3 mb-4">
-                    <div>
-                        <span class="badge dash-badge mb-2">Антропометрия</span>
-                        <h5 class="fw-bold mb-0">Замеры тела</h5>
-                    </div>
-                    <button class="btn btn-primary btn-sm px-3" type="button" id="saveMeasurementsBtn">
-                        <i class="bi bi-check2 me-1"></i>Сохранить все
-                    </button>
-                </div>
-
-                <div class="row g-0">
-                    <div class="col-12 col-md-6 pe-md-4">
-                        <div class="measure-row">
-                            <div>
-                                <div class="measure-row__label"><i class="bi bi-arrows-expand me-2" style="color:var(--accent)"></i>Рост</div>
-                                <div class="measure-row__sub">Не меняется, для расчёта ИМТ</div>
-                            </div>
-                            <div class="measure-input-wrap">
-                                <input type="number" class="measure-input" id="heightInput" value="{{ACTUAL_HEIGHT}}" step="0.5">
-                                <span class="measure-unit">см</span>
-                            </div>
+                <div class="col-12 col-md-6 ps-md-4" style="border-left: 1px solid var(--card-border);">
+                    <div class="measure-row">
+                        <div>
+                            <div class="measure-row__label"><i class="bi bi-rulers me-2" style="color:var(--accent)"></i>Грудь</div>
+                            <div class="measure-row__sub">Обхват на выдохе</div>
                         </div>
-                        <div class="measure-row">
-                            <div>
-                                <div class="measure-row__label"><i class="bi bi-crop me-2" style="color:var(--accent)"></i>Талия</div>
-                                <div class="measure-row__sub">Норма: до 80 см (женщины)</div>
-                            </div>
-                            <div class="measure-input-wrap">
-                                <input type="number" class="measure-input" id="waistInput" value="{{ACTUAL_WAIST}}" step="0.5">
-                                <span class="measure-unit">см</span>
-                            </div>
-                        </div>
-                        <div class="measure-row">
-                            <div>
-                                <div class="measure-row__label"><i class="bi bi-circle me-2" style="color:var(--accent)"></i>Бёдра</div>
-                                <div class="measure-row__sub">Соотношение талия/бёдра</div>
-                            </div>
-                            <div class="measure-input-wrap">
-                                <input type="number" class="measure-input" id="hipsInput" value="{{ACTUAL_HIPS}}" step="0.5">
-                                <span class="measure-unit">см</span>
-                            </div>
+                        <div class="measure-input-wrap">
+                            <input type="number" class="measure-input" id="chestInput" value="{{ACTUAL_CHEST}}" step="0.5">
+                            <span class="measure-unit">см</span>
                         </div>
                     </div>
-                    <div class="col-12 col-md-6 ps-md-4" style="border-left: 1px solid var(--card-border);">
-                        <div class="measure-row">
-                            <div>
-                                <div class="measure-row__label"><i class="bi bi-rulers me-2" style="color:var(--accent)"></i>Грудь</div>
-                                <div class="measure-row__sub">Обхват на выдохе</div>
-                            </div>
-                            <div class="measure-input-wrap">
-                                <input type="number" class="measure-input" id="chestInput" value="{{ACTUAL_CHEST}}" step="0.5">
-                                <span class="measure-unit">см</span>
-                            </div>
+                    <div class="measure-row">
+                        <div>
+                            <div class="measure-row__label"><i class="bi bi-slash-circle me-2" style="color:var(--accent)"></i>Рука</div>
+                            <div class="measure-row__sub">Бицепс в расслабленном виде</div>
                         </div>
-                        <div class="measure-row">
-                            <div>
-                                <div class="measure-row__label"><i class="bi bi-slash-circle me-2" style="color:var(--accent)"></i>Рука</div>
-                                <div class="measure-row__sub">Бицепс в расслабленном виде</div>
-                            </div>
-                            <div class="measure-input-wrap">
-                                <input type="number" class="measure-input" id="armInput" value="{{ACTUAL_ARM}}" step="0.5">
-                                <span class="measure-unit">см</span>
-                            </div>
+                        <div class="measure-input-wrap">
+                            <input type="number" class="measure-input" id="armInput" value="{{ACTUAL_ARM}}" step="0.5">
+                            <span class="measure-unit">см</span>
                         </div>
-                        <div class="measure-row">
-                            <div>
-                                <div class="measure-row__label"><i class="bi bi-bar-chart-steps me-2" style="color:var(--accent)"></i>ИМТ</div>
-                                <div class="measure-row__sub">Рассчитывается автоматически</div>
-                            </div>
-                            <div class="measure-input-wrap">
-                                <input type="number" class="measure-input" id="bmiDisplay" value="{{BMI_VALUE}}" step="0.1" readonly style="opacity:.6;cursor:default;">
-                                <span class="measure-unit">кг/м²</span>
-                            </div>
+                    </div>
+                    <div class="measure-row">
+                        <div>
+                            <div class="measure-row__label"><i class="bi bi-bar-chart-steps me-2" style="color:var(--accent)"></i>ИМТ</div>
+                            <div class="measure-row__sub">Рассчитывается автоматически</div>
+                        </div>
+                        <div class="measure-input-wrap">
+                            <input type="number" class="measure-input" id="bmiDisplay" value="{{BMI_VALUE}}" step="0.1" readonly style="opacity:.6;cursor:default;">
+                            <span class="measure-unit">кг/м²</span>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 
-        <!-- ══════════════════════════════════
-             СТРОКА 3 — ГИ и ХЕ
-        ══════════════════════════════════ -->
-        <div class="row g-4">
+    <!-- ГИ и ХЕ -->
+    <div class="row g-4">
 
-            <!-- Гликемический индекс -->
-            <div class="col-12 col-lg-7">
-                <div class="card register-card border-0 shadow-lg h-100">
-                    <div class="card-body p-4">
-                        <span class="badge dash-badge mb-2">Справочник</span>
-                        <h5 class="fw-bold mb-1">Гликемический индекс продуктов</h5>
-                        <p class="mb-4" style="color:var(--text-muted);font-size:.875rem;">
-                            Поиск по базе данных продуктов с гликемическим индексом
-                        </p>
+        <!-- Гликемический индекс -->
+        <div class="col-12 col-lg-7">
+            <div class="card register-card border-0 shadow-lg h-100">
+                <div class="card-body p-4">
+                    <span class="badge dash-badge mb-2">Справочник</span>
+                    <h5 class="fw-bold mb-1">Гликемический индекс продуктов</h5>
+                    <p class="mb-4" style="color:var(--text-muted);font-size:.875rem;">
+                        Поиск по базе данных продуктов с гликемическим индексом
+                    </p>
 
-                        <!-- Поиск -->
-                        <div class="input-group mb-4">
+                    <!-- Поиск -->
+                    <div class="input-group mb-4">
                 <span class="input-group-text" style="background:var(--input-bg);border-color:var(--input-border);color:var(--text-muted);">
                     <i class="bi bi-search"></i>
                 </span>
+                        <input
+                                type="text"
+                                class="form-control"
+                                id="giSearchInput"
+                                placeholder="Найти продукт..."
+                                style="background:var(--input-bg);border-color:var(--input-border);color:var(--text-main);"
+                        >
+                    </div>
+
+                    <!-- Результаты поиска -->
+                    <div id="giSearchResults" style="display:none;" class="mb-3">
+                        <div style="font-size:12px;color:var(--text-muted);font-weight:600;margin-bottom:8px;">
+                            РЕЗУЛЬТАТЫ ПОИСКА
+                        </div>
+                        <table class="gi-table" id="giSearchTable">
+                            <thead>
+                            <tr>
+                                <th>Продукт</th>
+                                <th>ГИ</th>
+                                <th>Уровень</th>
+                                <th>У (на 100 г)</th>
+                            </tr>
+                            </thead>
+                            <tbody id="giSearchTableBody">
+                            <!-- Результаты поиска -->
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Популярные продукты -->
+                    <div id="giPopularProducts">
+                        <div style="font-size:12px;color:var(--text-muted);font-weight:600;margin-bottom:8px;">
+                            ПОПУЛЯРНЫЕ ПРОДУКТЫ
+                        </div>
+                        <table class="gi-table">
+                            <thead>
+                            <tr>
+                                <th>Продукт</th>
+                                <th>ГИ</th>
+                                <th>Уровень</th>
+                                <th>У (на 100 г)</th>
+                            </tr>
+                            </thead>
+                            <tbody id="giPopularTableBody">
+                            <tr>
+                                <td colspan="4" style="text-align:center;color:var(--text-muted);">
+                                    <i class="bi bi-hourglass-split me-2"></i>Загрузка...
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Калькулятор хлебных единиц -->
+        <div class="col-12 col-lg-5">
+            <div class="card register-card border-0 shadow-lg h-100">
+                <div class="card-body p-4">
+                    <span class="badge dash-badge mb-2">Калькулятор</span>
+                    <h5 class="fw-bold mb-1">Хлебные единицы (ХЕ)</h5>
+                    <p class="mb-4" style="color:var(--text-muted);font-size:.875rem;">
+                        1 ХЕ = 12 г углеводов
+                    </p>
+
+                    <!-- Поиск продукта -->
+                    <div class="mb-3">
+                        <label class="form-label" style="font-size:12px;font-weight:700;color:var(--text-muted);text-transform:uppercase;">
+                            Выберите продукт
+                        </label>
+                        <div class="input-group">
+                    <span class="input-group-text" style="background:var(--input-bg);border-color:var(--input-border);color:var(--text-muted);">
+                        <i class="bi bi-search"></i>
+                    </span>
                             <input
                                     type="text"
                                     class="form-control"
-                                    id="giSearchInput"
-                                    placeholder="Найти продукт..."
+                                    id="xeSearchInput"
+                                    placeholder="Начните вводить название..."
                                     style="background:var(--input-bg);border-color:var(--input-border);color:var(--text-main);"
                             >
                         </div>
 
-                        <!-- Результаты поиска (изначально скрыты) -->
-                        <div id="giSearchResults" style="display:none;" class="mb-3">
-                            <div style="font-size:12px;color:var(--text-muted);font-weight:600;margin-bottom:8px;">
-                                РЕЗУЛЬТАТЫ ПОИСКА
-                            </div>
-                            <table class="gi-table" id="giSearchTable">
-                                <thead>
-                                <tr>
-                                    <th>Продукт</th>
-                                    <th>ГИ</th>
-                                    <th>Уровень</th>
-                                    <th>У (на 100 г)</th>
-                                </tr>
-                                </thead>
-                                <tbody id="giSearchTableBody">
+                        <!-- Выпадающий список результатов -->
+                        <div id="xeSearchResults" class="position-relative">
+                            <div id="xeSearchDropdown" class="xe-dropdown" style="display:none;">
                                 <!-- Результаты поиска -->
-                                </tbody>
-                            </table>
-                        </div>
-
-                        <!-- Популярные продукты -->
-                        <div id="giPopularProducts">
-                            <div style="font-size:12px;color:var(--text-muted);font-weight:600;margin-bottom:8px;">
-                                ПОПУЛЯРНЫЕ ПРОДУКТЫ
                             </div>
-                            <table class="gi-table">
-                                <thead>
-                                <tr>
-                                    <th>Продукт</th>
-                                    <th>ГИ</th>
-                                    <th>Уровень</th>
-                                    <th>У (на 100 г)</th>
-                                </tr>
-                                </thead>
-                                <tbody id="giPopularTableBody">
-                                <tr>
-                                    <td colspan="4" style="text-align:center;color:var(--text-muted);">
-                                        <i class="bi bi-hourglass-split me-2"></i>Загрузка...
-                                    </td>
-                                </tr>
-                                </tbody>
-                            </table>
                         </div>
+                    </div>
+
+                    <!-- Выбранный продукт -->
+                    <div id="xeSelectedProduct" style="display:none;" class="mb-3">
+                        <div style="background:rgba(139,92,246,.1);border:1px solid rgba(139,92,246,.3);border-radius:10px;padding:12px;">
+                            <div style="font-size:12px;color:var(--text-muted);font-weight:600;margin-bottom:4px;">ВЫБРАН</div>
+                            <div id="xeProductName" style="font-size:14px;font-weight:700;color:var(--text-main);"></div>
+                            <div id="xeProductCarbs" style="font-size:12px;color:var(--text-muted);margin-top:2px;"></div>
+                        </div>
+                    </div>
+
+                    <!-- Ввод граммов -->
+                    <div class="mb-4">
+                        <label class="form-label" style="font-size:12px;font-weight:700;color:var(--text-muted);text-transform:uppercase;">
+                            Вес продукта (г)
+                        </label>
+                        <input
+                                type="number"
+                                class="form-control"
+                                id="xeWeightInput"
+                                placeholder="100"
+                                min="1"
+                                step="1"
+                                disabled
+                                style="background:var(--input-bg);border-color:var(--input-border);color:var(--text-main);font-size:18px;font-weight:700;text-align:center;"
+                        >
+                    </div>
+
+                    <!-- Результат -->
+                    <div class="xe-result">
+                        <div class="xe-result__val" id="xeResultValue">—</div>
+                        <div class="xe-result__label">Хлебных единиц (ХЕ)</div>
+                    </div>
+
+                    <!-- Формула -->
+                    <div class="xe-formula" id="xeFormula" style="display:none;">
+                        <i class="bi bi-calculator me-2"></i>
+                        <span id="xeFormulaText"></span>
                     </div>
                 </div>
             </div>
-
-            <!-- Калькулятор хлебных единиц -->
-            <div class="col-12 col-lg-5">
-                <div class="card register-card border-0 shadow-lg h-100">
-                    <div class="card-body p-4">
-                        <span class="badge dash-badge mb-2">Калькулятор</span>
-                        <h5 class="fw-bold mb-1">Хлебные единицы (ХЕ)</h5>
-                        <p class="mb-4" style="color:var(--text-muted);font-size:.875rem;">
-                            1 ХЕ = 12 г углеводов
-                        </p>
-
-                        <!-- Поиск продукта -->
-                        <div class="mb-3">
-                            <label class="form-label" style="font-size:12px;font-weight:700;color:var(--text-muted);text-transform:uppercase;">
-                                Выберите продукт
-                            </label>
-                            <div class="input-group">
-                    <span class="input-group-text" style="background:var(--input-bg);border-color:var(--input-border);color:var(--text-muted);">
-                        <i class="bi bi-search"></i>
-                    </span>
-                                <input
-                                        type="text"
-                                        class="form-control"
-                                        id="xeSearchInput"
-                                        placeholder="Начните вводить название..."
-                                        style="background:var(--input-bg);border-color:var(--input-border);color:var(--text-main);"
-                                >
-                            </div>
-
-                            <!-- Выпадающий список результатов -->
-                            <div id="xeSearchResults" class="position-relative">
-                                <div id="xeSearchDropdown" class="xe-dropdown" style="display:none;">
-                                    <!-- Результаты поиска -->
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Выбранный продукт -->
-                        <div id="xeSelectedProduct" style="display:none;" class="mb-3">
-                            <div style="background:rgba(139,92,246,.1);border:1px solid rgba(139,92,246,.3);border-radius:10px;padding:12px;">
-                                <div style="font-size:12px;color:var(--text-muted);font-weight:600;margin-bottom:4px;">ВЫБРАН</div>
-                                <div id="xeProductName" style="font-size:14px;font-weight:700;color:var(--text-main);"></div>
-                                <div id="xeProductCarbs" style="font-size:12px;color:var(--text-muted);margin-top:2px;"></div>
-                            </div>
-                        </div>
-
-                        <!-- Ввод граммов -->
-                        <div class="mb-4">
-                            <label class="form-label" style="font-size:12px;font-weight:700;color:var(--text-muted);text-transform:uppercase;">
-                                Вес продукта (г)
-                            </label>
-                            <input
-                                    type="number"
-                                    class="form-control"
-                                    id="xeWeightInput"
-                                    placeholder="100"
-                                    min="1"
-                                    step="1"
-                                    disabled
-                                    style="background:var(--input-bg);border-color:var(--input-border);color:var(--text-main);font-size:18px;font-weight:700;text-align:center;"
-                            >
-                        </div>
-
-                        <!-- Результат -->
-                        <div class="xe-result">
-                            <div class="xe-result__val" id="xeResultValue">—</div>
-                            <div class="xe-result__label">Хлебных единиц (ХЕ)</div>
-                        </div>
-
-                        <!-- Формула -->
-                        <div class="xe-formula" id="xeFormula" style="display:none;">
-                            <i class="bi bi-calculator me-2"></i>
-                            <span id="xeFormulaText"></span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
         </div>
-    </main>
 
-    <!-- ═══ МОДАЛЬНОЕ ОКНО HbA1c ═══ -->
-    <div class="modal fade" id="hba1cModal" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content" style="background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 16px;">
-                <div class="modal-header" style="border-bottom: 1px solid var(--card-border);">
-                    <h5 class="modal-title fw-bold" style="color: var(--text-main);">
-                        <i class="bi bi-clipboard-data me-2" style="color: var(--accent);"></i>
-                        Гликированный гемоглобин
-                    </h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" style="filter: invert(1);"></button>
-                </div>
-                <div class="modal-body p-4">
+    </div>
+</main>
 
-                    <!-- Последний результат -->
-                    <div id="hba1cLatest" style="display:none; margin-bottom: 24px;">
-                        <div style="font-size: 12px; color: var(--text-muted); font-weight: 600; margin-bottom: 8px;">ПОСЛЕДНИЙ РЕЗУЛЬТАТ</div>
-                        <div style="background: rgba(139, 92, 246, 0.1); border: 1px solid rgba(139, 92, 246, 0.3); border-radius: 12px; padding: 16px;">
-                            <div style="display: flex; justify-content: space-between; align-items: center;">
-                                <div>
-                                    <div style="font-size: 32px; font-weight: 800; color: var(--text-main); line-height: 1;" id="hba1cLatestValue">—</div>
-                                    <div style="font-size: 13px; color: var(--text-muted); margin-top: 4px;" id="hba1cLatestDate">—</div>
-                                </div>
-                                <div>
-                                    <span id="hba1cLatestBadge" class="gi-badge">—</span>
-                                </div>
+<!-- модалка HbA1c -->
+<div class="modal fade" id="hba1cModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content" style="background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 16px;">
+            <div class="modal-header" style="border-bottom: 1px solid var(--card-border);">
+                <h5 class="modal-title fw-bold" style="color: var(--text-main);">
+                    <i class="bi bi-clipboard-data me-2" style="color: var(--accent);"></i>
+                    Гликированный гемоглобин
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" style="filter: invert(1);"></button>
+            </div>
+            <div class="modal-body p-4">
+
+                <!-- Последний результат -->
+                <div id="hba1cLatest" style="display:none; margin-bottom: 24px;">
+                    <div style="font-size: 12px; color: var(--text-muted); font-weight: 600; margin-bottom: 8px;">ПОСЛЕДНИЙ РЕЗУЛЬТАТ</div>
+                    <div style="background: rgba(139, 92, 246, 0.1); border: 1px solid rgba(139, 92, 246, 0.3); border-radius: 12px; padding: 16px;">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <div>
+                                <div style="font-size: 32px; font-weight: 800; color: var(--text-main); line-height: 1;" id="hba1cLatestValue">—</div>
+                                <div style="font-size: 13px; color: var(--text-muted); margin-top: 4px;" id="hba1cLatestDate">—</div>
+                            </div>
+                            <div>
+                                <span id="hba1cLatestBadge" class="gi-badge">—</span>
                             </div>
                         </div>
                     </div>
+                </div>
 
-                    <!-- Форма добавления -->
-                    <form id="hba1cForm">
-                        <div class="mb-3">
-                            <label class="form-label" style="font-size: 12px; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">
-                                Значение HbA1c (%)
-                            </label>
-                            <input
-                                    type="number"
-                                    class="form-control"
-                                    id="hba1cValueInput"
-                                    placeholder="5.7"
-                                    step="0.1"
-                                    min="3"
-                                    max="20"
-                                    required
-                                    style="font-size: 18px; font-weight: 700; text-align: center;"
-                            >
-                            <small style="color: var(--text-muted); font-size: 11px; display: block; margin-top: 6px;">
-                                Норма: &lt; 5.7% | Преддиабет: 5.7–6.4% | Диабет: ≥ 6.5%
-                            </small>
-                        </div>
-
-                        <div class="mb-3">
-                            <label class="form-label" style="font-size: 12px; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">
-                                Дата замера
-                            </label>
-                            <input
-                                    type="date"
-                                    class="form-control"
-                                    id="hba1cDateInput"
-                                    required
-                            >
-                        </div>
-
-                        <div class="mb-4">
-                            <label class="form-label" style="font-size: 12px; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">
-                                Примечание (опционально)
-                            </label>
-                            <textarea
-                                    class="form-control"
-                                    id="hba1cNoteInput"
-                                    rows="2"
-                                    placeholder="Комментарий к замеру..."
-                            ></textarea>
-                        </div>
-
-                        <button type="submit" class="btn btn-primary w-100" id="hba1cSaveBtn">
-                            <i class="bi bi-check2 me-1"></i>Сохранить замер
-                        </button>
-                    </form>
-
-                    <!-- История -->
-                    <div id="hba1cHistory" style="margin-top: 24px; display: none;">
-                        <div style="font-size: 12px; color: var(--text-muted); font-weight: 600; margin-bottom: 12px;">ИСТОРИЯ ЗА ГОД</div>
-                        <div id="hba1cHistoryList" style="max-height: 200px; overflow-y: auto;">
-                            <!-- Записи истории -->
-                        </div>
+                <!-- Форма добавления -->
+                <form id="hba1cForm">
+                    <div class="mb-3">
+                        <label class="form-label" style="font-size: 12px; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">
+                            Значение HbA1c (%)
+                        </label>
+                        <input
+                                type="number"
+                                class="form-control"
+                                id="hba1cValueInput"
+                                placeholder="5.7"
+                                step="0.1"
+                                min="3"
+                                max="20"
+                                required
+                                style="font-size: 18px; font-weight: 700; text-align: center;"
+                        >
+                        <small style="color: var(--text-muted); font-size: 11px; display: block; margin-top: 6px;">
+                            Норма: &lt; 5.7% | Преддиабет: 5.7–6.4% | Диабет: ≥ 6.5%
+                        </small>
                     </div>
 
+                    <div class="mb-3">
+                        <label class="form-label" style="font-size: 12px; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">
+                            Дата замера
+                        </label>
+                        <input
+                                type="date"
+                                class="form-control"
+                                id="hba1cDateInput"
+                                required
+                        >
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="form-label" style="font-size: 12px; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">
+                            Примечание (опционально)
+                        </label>
+                        <textarea
+                                class="form-control"
+                                id="hba1cNoteInput"
+                                rows="2"
+                                placeholder="Комментарий к замеру..."
+                        ></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary w-100" id="hba1cSaveBtn">
+                        <i class="bi bi-check2 me-1"></i>Сохранить замер
+                    </button>
+                </form>
+
+                <!-- История -->
+                <div id="hba1cHistory" style="margin-top: 24px; display: none;">
+                    <div style="font-size: 12px; color: var(--text-muted); font-weight: 600; margin-bottom: 12px;">ИСТОРИЯ ЗА ГОД</div>
+                    <div id="hba1cHistoryList" style="max-height: 200px; overflow-y: auto;">
+                        <!-- Записи истории -->
+                    </div>
                 </div>
+
             </div>
         </div>
     </div>
+</div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
-    <script src="../js/measurements.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script src="../js/measurements.js"></script>
 </body>
 </html>
 

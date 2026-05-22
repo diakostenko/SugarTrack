@@ -1,9 +1,5 @@
-/* ══════════════════════════════════
-   medicines.css
-   Стили страницы «Лекарства»
-   ══════════════════════════════════ */
+/* medicines.css */
 
-/* ── Tracker карточка препарата ── */
 .med-item {
     display: flex;
     align-items: center;
@@ -81,7 +77,6 @@
     color: var(--accent);
 }
 
-/* ── Кнопка добавить препарат ── */
 .add-med-btn {
     display: flex;
     align-items: center;
@@ -170,7 +165,6 @@
     box-shadow: 0 0 0 .2rem rgba(139,92,246,.15);
 }
 
-/* ── График глюкозы (статика) ── */
 .glucose-chart-wrap {
     height: 160px;
     display: flex;
@@ -179,19 +173,18 @@
     position: relative;
 }
 
-/* горизонтальные линии сетки */
 .glucose-chart-wrap::before {
     content: '';
     position: absolute;
     inset: 0;
     background:
-        repeating-linear-gradient(
-            to bottom,
-            transparent,
-            transparent calc(25% - 1px),
-            var(--card-border) calc(25% - 1px),
-            var(--card-border) 25%
-        );
+            repeating-linear-gradient(
+                    to bottom,
+                    transparent,
+                    transparent calc(25% - 1px),
+                    var(--card-border) calc(25% - 1px),
+                    var(--card-border) 25%
+            );
     pointer-events: none;
 }
 
@@ -253,7 +246,6 @@
     flex-shrink: 0;
 }
 
-/* ── Целевой диапазон ── */
 .range-bar-wrap {
     height: 8px;
     border-radius: 999px;
@@ -266,7 +258,6 @@
     border-radius: 999px;
 }
 
-/* ── Календарь ── */
 .cal-grid {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
@@ -359,7 +350,6 @@
     color: var(--text-muted);
 }
 
-/* ── Улучшения для календаря ── */
 .cal-day {
     cursor: pointer;
     transition: background-color 0.2s ease, transform 0.1s ease;
@@ -373,7 +363,6 @@
     pointer-events: none;
 }
 
-/* ── Пустое состояние событий ── */
 .events-empty-state {
     text-align: center;
     padding: 40px 20px;

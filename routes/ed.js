@@ -9,9 +9,7 @@ import { requireAuth, requireUserType } from '../middleware/auth.js';
 const router = express.Router();
 const staticDir = path.join(process.cwd(), 'public', 'ed');
 
-// ═══════════════════════════════════════════════════════
 // Вспомогательные функции
-// ═══════════════════════════════════════════════════════
 
 function esc(value) {
     return String(value ?? '')
@@ -152,15 +150,11 @@ function buildFactCards(user) {
     `;
 }
 
-// ═══════════════════════════════════════════════════════
 // Middleware для всех роутов
-// ═══════════════════════════════════════════════════════
 
 router.use(requireAuth, requireUserType('ed'));
 
-// ═══════════════════════════════════════════════════════
 // API: Случайная цитата
-// ═══════════════════════════════════════════════════════
 
 router.get('/api/quote', async (req, res) => {
     try {
@@ -179,9 +173,7 @@ router.get('/api/quote', async (req, res) => {
     }
 });
 
-// ═══════════════════════════════════════════════════════
 // HTML: Профиль
-// ═══════════════════════════════════════════════════════
 
 router.get('/profile.html', async (req, res) => {
     try {
@@ -210,9 +202,7 @@ router.get('/profile.html', async (req, res) => {
     }
 });
 
-// ═══════════════════════════════════════════════════════
 // API: Получить данные дня (эмоциональный дневник)
-// ═══════════════════════════════════════════════════════
 
 router.get('/api/day/:date', requireAuth, requireUserType('ed'), async (req, res) => {
     try {
@@ -243,10 +233,7 @@ router.get('/api/day/:date', requireAuth, requireUserType('ed'), async (req, res
     }
 });
 
-// ═══════════════════════════════════════════════════════
 // API: Сохранить/обновить приём пищи
-// ═══════════════════════════════════════════════════════
-
 
 router.post('/api/save-meal', requireAuth, requireUserType('ed'), async (req, res) => {
     try {
@@ -304,9 +291,7 @@ router.post('/api/save-meal', requireAuth, requireUserType('ed'), async (req, re
     }
 });
 
-// ═══════════════════════════════════════════════════════
 // API: Получить данные за последние 30 дней (для диаграммы)
-// ═══════════════════════════════════════════════════════
 
 router.get('/api/emotion-chart', requireAuth, requireUserType('ed'), async (req, res) => {
     try {

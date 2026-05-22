@@ -27,7 +27,7 @@ async function loadWeightChart() {
         const emptyState = document.getElementById('weightChartEmpty');
 
         if (!canvas || !emptyState) {
-            console.error('❌ Элементы графика не найдены');
+            console.error('Элементы графика не найдены');
             return;
         }
 
@@ -117,7 +117,7 @@ async function loadWeightChart() {
             }
         });
     } catch (error) {
-        console.error('❌ Ошибка загрузки графика:', error);
+        console.error('Ошибка загрузки графика:', error);
         const canvas = document.getElementById('weightChart');
         const emptyState = document.getElementById('weightChartEmpty');
         if (canvas) canvas.style.display = 'none';
@@ -132,7 +132,7 @@ function initWeightSaving() {
     const saveWeightBtn = document.getElementById('saveWeightBtn');
 
     if (!saveWeightBtn || !weightInput) {
-        console.warn('⚠️ Элементы сохранения веса не найдены');
+        console.warn('Элементы сохранения веса не найдены');
         return;
     }
 
@@ -162,11 +162,11 @@ function initWeightSaving() {
                 await loadWeightChart();
             } else {
                 const error = await response.json();
-                console.error('❌ Ошибка сервера:', error);
+                console.error('Ошибка сервера:', error);
                 alert('Ошибка: ' + (error.error || 'Неизвестная ошибка'));
             }
         } catch (error) {
-            console.error('❌ Ошибка сохранения веса:', error);
+            console.error('Ошибка сохранения веса:', error);
             alert('Ошибка сохранения веса');
         } finally {
             saveWeightBtn.disabled = false;
