@@ -1,7 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('🟢 Страница профиля загружена');
-
-    // Инициализируем кнопку выхода
+    // инициализируем кнопку выхода
     initLogoutButton();
 });
 
@@ -21,8 +19,6 @@ function initLogoutButton() {
         }
 
         try {
-            console.log('Выполняется выход...');
-
             logoutBtn.disabled = true;
             logoutBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Выход...';
 
@@ -37,14 +33,12 @@ function initLogoutButton() {
             const data = await response.json();
 
             if (response.ok && data.success) {
-                console.log('Выход успешен');
-
-                // Очищаем localStorage
+                // очищаем localstorage
                 localStorage.removeItem('userType');
                 localStorage.removeItem('userId');
                 localStorage.removeItem('rememberMe');
 
-                // Перенаправляем на страницу входа
+                // перенаправляем на страницу входа
                 window.location.href = '/login.html';
             } else {
                 console.error('Ошибка выхода:', data.error);
@@ -61,6 +55,4 @@ function initLogoutButton() {
             logoutBtn.innerHTML = '<i class="bi bi-box-arrow-right me-2"></i>Выйти из аккаунта';
         }
     });
-
-    console.log('Кнопка выхода инициализирована');
 }

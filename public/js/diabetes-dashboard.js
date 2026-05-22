@@ -57,9 +57,7 @@ class DiabetesDashboard {
 
     async loadDashboardData() {
         try {
-            console.log('Загрузка данных дашборда...');
             const data = await this.requestJSON('/diabetes/api/dashboard');
-            console.log('Данные получены:', data);
 
             this.state.latestGlucose = data.latestGlucose;
             this.state.avgGlucose = data.avgGlucose;
@@ -72,7 +70,6 @@ class DiabetesDashboard {
             this.render();
         } catch (error) {
             console.error('Ошибка загрузки дашборда:', error);
-            console.error('Детали ошибки:', error.message);
             this.showMessage('Не удалось загрузить данные', 'danger');
         }
     }

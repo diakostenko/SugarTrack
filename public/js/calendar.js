@@ -74,17 +74,17 @@ class CalendarManager {
         const year = this.currentDate.getFullYear();
         const month = this.currentDate.getMonth();
 
-        // Обновляем заголовок
+        // обновляем заголовок
         if (this.elements.calendarTitle) {
             this.elements.calendarTitle.textContent = `${this.getMonthName(month)} ${year}`;
         }
 
-        // Первый день месяца
+        // первый день месяца
         const firstDay = new Date(year, month, 1);
-        // Последний день месяца
+        // последний день месяца
         const lastDay = new Date(year, month + 1, 0);
 
-        // День недели первого дня (0 = воскресенье, переводим в понедельник = 0)
+        // день недели первого дня (0 = воскресенье, переводим в понедельник = 0)
         let firstDayOfWeek = firstDay.getDay();
         firstDayOfWeek = firstDayOfWeek === 0 ? 6 : firstDayOfWeek - 1;
 
@@ -96,13 +96,13 @@ class CalendarManager {
 
         let html = '';
 
-        // Дни предыдущего месяца
+        // дни предыдущего месяца
         for (let i = firstDayOfWeek - 1; i >= 0; i--) {
             const day = daysInPrevMonth - i;
             html += `<div class="cal-day other-month">${day}</div>`;
         }
 
-        // Дни текущего месяца
+        // дни текущего месяца
         for (let day = 1; day <= daysInMonth; day++) {
             const dateStr = this.getDateKey(new Date(year, month, day));
             const dayEvents = this.events.filter(e => e.date === dateStr);
@@ -125,7 +125,7 @@ class CalendarManager {
             html += `<div class="${classes}">${day}${dotsHtml}</div>`;
         }
 
-        // Дни следующего месяца
+        // дни следующего месяца
         const totalCells = Math.ceil((firstDayOfWeek + daysInMonth) / 7) * 7;
         const remainingCells = totalCells - (firstDayOfWeek + daysInMonth);
         for (let day = 1; day <= remainingCells; day++) {
@@ -151,12 +151,12 @@ class CalendarManager {
             return;
         }
 
-        // Сортируем по дате
+        // сортируем по дате
         const sortedEvents = [...this.events].sort((a, b) =>
             new Date(a.date) - new Date(b.date)
         );
 
-        // Показываем только будущие события
+        // показываем только будущие события
         const today = new Date();
         today.setHours(0, 0, 0, 0);
         const upcomingEvents = sortedEvents.filter(e => new Date(e.date) >= today);
@@ -199,7 +199,7 @@ class CalendarManager {
 
     openEventModal() {
         this.resetEventForm();
-        // Устанавливаем сегодняшнюю дату по умолчанию
+        // устанавливаем сегодняшнюю дату по умолчанию
         if (this.elements.eventDate) {
             const today = new Date();
             this.elements.eventDate.value = this.getDateKey(today);
@@ -274,5 +274,5 @@ class CalendarManager {
     }
 }
 
-// Экспортируем для использования в medicines.js
+// экспортируем для использования в medicines.js
 window.CalendarManager = CalendarManager;

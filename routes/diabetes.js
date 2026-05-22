@@ -4,7 +4,6 @@ import path from 'path';
 import { User } from '../models/user.js';
 import { Product } from '../models/Product.js';
 import { requireAuth, requireUserType } from '../middleware/auth.js';
-import { requireAuth as requireAuthAPI, requireUserType as requireUserTypeAPI } from '../middleware/apiAuth.js';
 import { Medicine } from '../models/Medicine.js';
 import { Pill } from '../models/Pill.js';
 import { Meal } from '../models/Meal.js';
@@ -471,7 +470,7 @@ async function buildDayPayload(userId, dateKey) {
 	};
 }
 
-router.get('/day/:date', requireAuthAPI, requireUserTypeAPI('diabetes'), async (req, res) => {
+router.get('/day/:date', requireAuth, requireUserType('diabetes'), async (req, res) => {
 	try {
 		const dateKey = normalizeDateKey(req.params.date);
 		return res.json(await buildDayPayload(req.user.userId, dateKey));
@@ -481,7 +480,7 @@ router.get('/day/:date', requireAuthAPI, requireUserTypeAPI('diabetes'), async (
 	}
 });
 
-router.post('/insulin', requireAuthAPI, requireUserTypeAPI('diabetes'), async (req, res) => {
+router.post('/insulin', requireAuth, requireUserType('diabetes'), async (req, res) => {
 	try {
 		const name = String(req.body.name || '').trim();
 		const insulinType = req.body.insulinType === 'long' ? 'long' : 'short';
@@ -520,7 +519,7 @@ router.post('/insulin', requireAuthAPI, requireUserTypeAPI('diabetes'), async (r
 	}
 });
 
-router.patch('/insulin/:medicineId/doses/:doseIndex/toggle', requireAuthAPI, requireUserTypeAPI('diabetes'), async (req, res) => {
+router.patch('/insulin/:medicineId/doses/:doseIndex/toggle', requireAuth, requireUserType('diabetes'), async (req, res) => {
 	try {
 		const doseIndex = Number.parseInt(req.params.doseIndex, 10);
 		const dateKey = normalizeDateKey(req.body?.date || req.query?.date || getTodayKey());
@@ -600,7 +599,7 @@ async function buildPillsDayPayload(userId, dateKey) {
 	};
 }
 
-router.get('/pills/day/:date', requireAuthAPI, requireUserTypeAPI('diabetes'), async (req, res) => {
+router.get('/pills/day/:date', requireAuth, requireUserType('diabetes'), async (req, res) => {
 	try {
 		const dateKey = normalizeDateKey(req.params.date);
 		return res.json(await buildPillsDayPayload(req.user.userId, dateKey));
@@ -610,7 +609,7 @@ router.get('/pills/day/:date', requireAuthAPI, requireUserTypeAPI('diabetes'), a
 	}
 });
 
-router.post('/pills', requireAuthAPI, requireUserTypeAPI('diabetes'), async (req, res) => {
+router.post('/pills', requireAuth, requireUserType('diabetes'), async (req, res) => {
 	try {
 		const name = String(req.body.name || '').trim();
 		const dosesPerDay = Number.parseInt(req.body.dosesPerDay, 10);
@@ -641,7 +640,7 @@ router.post('/pills', requireAuthAPI, requireUserTypeAPI('diabetes'), async (req
 	}
 });
 
-router.patch('/pills/:pillId/doses/:doseIndex/toggle', requireAuthAPI, requireUserTypeAPI('diabetes'), async (req, res) => {
+router.patch('/pills/:pillId/doses/:doseIndex/toggle', requireAuth, requireUserType('diabetes'), async (req, res) => {
 	try {
 		const doseIndex = Number.parseInt(req.params.doseIndex, 10);
 		const dateKey = normalizeDateKey(req.body?.date || req.query?.date || getTodayKey());
@@ -680,7 +679,7 @@ router.patch('/pills/:pillId/doses/:doseIndex/toggle', requireAuthAPI, requireUs
 });
 
 // API: Получить все события
-router.get('/events', requireAuthAPI, requireUserTypeAPI('diabetes'), async (req, res) => {
+router.get('/events', requireAuth, requireUserType('diabetes'), async (req, res) => {
 	try {
 		const user = await User.findById(req.user.userId).select('events').lean();
 		return res.json({ events: user?.events || [] });
@@ -691,7 +690,7 @@ router.get('/events', requireAuthAPI, requireUserTypeAPI('diabetes'), async (req
 });
 
 // API: Добавить событие
-router.post('/events', requireAuthAPI, requireUserTypeAPI('diabetes'), async (req, res) => {
+router.post('/events', requireAuth, requireUserType('diabetes'), async (req, res) => {
 	try {
 		const { type, title, date, description } = req.body;
 
@@ -724,7 +723,7 @@ router.post('/events', requireAuthAPI, requireUserTypeAPI('diabetes'), async (re
 });
 
 // API: Получить историю веса за последние 14 дней
-router.get('/api/weight/history', requireAuthAPI, requireUserTypeAPI('diabetes'), async (req, res) => {
+router.get('/api/weight/history', requireAuth, requireUserType('diabetes'), async (req, res) => {
 	try {
 		const user = await User.findById(req.user.userId).select('weightHistory').lean();
 
@@ -746,7 +745,7 @@ router.get('/api/weight/history', requireAuthAPI, requireUserTypeAPI('diabetes')
 });
 
 // API: Сохранить вес (ИСПРАВЛЕННЫЙ)
-router.post('/api/weight', requireAuthAPI, requireUserTypeAPI('diabetes'), async (req, res) => {
+router.post('/api/weight', requireAuth, requireUserType('diabetes'), async (req, res) => {
 	try {
 		const { weight } = req.body;
 
@@ -806,7 +805,7 @@ router.post('/api/weight', requireAuthAPI, requireUserTypeAPI('diabetes'), async
 });
 
 // API: Получить историю глюкозы за последние 14 дней
-router.get('/api/glucose/history', requireAuthAPI, requireUserTypeAPI('diabetes'), async (req, res) => {
+router.get('/api/glucose/history', requireAuth, requireUserType('diabetes'), async (req, res) => {
 	try {
 		const fourteenDaysAgo = new Date();
 		fourteenDaysAgo.setDate(fourteenDaysAgo.getDate() - 14);
@@ -856,7 +855,7 @@ router.get('/api/glucose/history', requireAuthAPI, requireUserTypeAPI('diabetes'
 });
 
 // API: Добавить замер глюкозы
-router.post('/api/glucose', requireAuthAPI, requireUserTypeAPI('diabetes'), async (req, res) => {
+router.post('/api/glucose', requireAuth, requireUserType('diabetes'), async (req, res) => {
 	try {
 		const { value, date, time, note } = req.body;
 
@@ -895,7 +894,7 @@ router.post('/api/glucose', requireAuthAPI, requireUserTypeAPI('diabetes'), asyn
 	}
 });
 
-router.get('/api/dashboard', requireAuthAPI, requireUserTypeAPI('diabetes'), async (req, res) => {
+router.get('/api/dashboard', requireAuth, requireUserType('diabetes'), async (req, res) => {
 	try {
 		console.log('=== ДАШБОРД: Начало загрузки ===');
 		console.log('userId:', req.user.userId);
@@ -1049,7 +1048,7 @@ router.get('/api/dashboard', requireAuthAPI, requireUserTypeAPI('diabetes'), asy
 // ═══════════════════════════════════════════════════════
 
 // Добавить замер HbA1c
-router.post('/api/hba1c', requireAuthAPI, requireUserTypeAPI('diabetes'), async (req, res) => {
+router.post('/api/hba1c', requireAuth, requireUserType('diabetes'), async (req, res) => {
 	try {
 		const { value, date, note } = req.body;
 
@@ -1088,7 +1087,7 @@ router.post('/api/hba1c', requireAuthAPI, requireUserTypeAPI('diabetes'), async 
 });
 
 // Получить историю HbA1c
-router.get('/api/hba1c/history', requireAuthAPI, requireUserTypeAPI('diabetes'), async (req, res) => {
+router.get('/api/hba1c/history', requireAuth, requireUserType('diabetes'), async (req, res) => {
 	try {
 		const oneYearAgo = new Date();
 		oneYearAgo.setFullYear(oneYearAgo.getFullYear() - 1);
@@ -1118,7 +1117,7 @@ router.get('/api/hba1c/history', requireAuthAPI, requireUserTypeAPI('diabetes'),
 });
 
 // Получить последний замер HbA1c
-router.get('/api/hba1c/latest', requireAuthAPI, requireUserTypeAPI('diabetes'), async (req, res) => {
+router.get('/api/hba1c/latest', requireAuth, requireUserType('diabetes'), async (req, res) => {
 	try {
 		const latest = await HbA1cRecord.findOne({
 			userId: req.user.userId
@@ -1146,7 +1145,7 @@ router.get('/api/hba1c/latest', requireAuthAPI, requireUserTypeAPI('diabetes'), 
 });
 
 // Удалить запись HbA1c
-router.delete('/api/hba1c/:id', requireAuthAPI, requireUserTypeAPI('diabetes'), async (req, res) => {
+router.delete('/api/hba1c/:id', requireAuth, requireUserType('diabetes'), async (req, res) => {
 	try {
 		const record = await HbA1cRecord.findOneAndDelete({
 			_id: req.params.id,

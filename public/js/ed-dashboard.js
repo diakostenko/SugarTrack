@@ -2,7 +2,7 @@ const quoteElement = document.getElementById('daily-quote');
 const quoteAuthorElement = document.getElementById('daily-quote-author');
 const refreshButton = document.getElementById('refresh-quote-btn');
 
-// Загрузка цитаты
+// загрузка цитаты
 async function loadQuote() {
     try {
         const response = await fetch('/ed/api/quote', {
@@ -23,7 +23,7 @@ async function loadQuote() {
     }
 }
 
-// Загрузка статистики за неделю
+// загрузка статистики за неделю
 async function loadWeeklyStats() {
     try {
         const response = await fetch('/ed/api/weekly-stats', {

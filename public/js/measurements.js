@@ -1,11 +1,8 @@
-// ═══════════════════════════════════════════════════════
-// ГЛАВНЫЙ БЛОК ИНИЦИАЛИЗАЦИИ
-// ═══════════════════════════════════════════════════════
+// главный блок инициализации
 
 let weightChart = null;
 
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('🟢 Страница measurements.html загружена');
     loadWeightChart();
     initWeightSaving();
     initBodyMeasurements();
@@ -14,24 +11,17 @@ document.addEventListener('DOMContentLoaded', () => {
     initHbA1c();
 });
 
-// ═══════════════════════════════════════════════════════
-// ГРАФИК ДИНАМИКИ ВЕСА
-// ═══════════════════════════════════════════════════════
+// график динамики веса
 
 async function loadWeightChart() {
-    console.log('📊 Загрузка графика веса...');
-
     try {
         const response = await fetch('/diabetes/api/weight/history');
-
-        console.log('📡 Ответ сервера:', response.status);
 
         if (!response.ok) {
             throw new Error(`Ошибка ${response.status}: ${response.statusText}`);
         }
 
         const data = await response.json();
-        console.log('📦 Данные истории веса:', data);
 
         const canvas = document.getElementById('weightChart');
         const emptyState = document.getElementById('weightChartEmpty');
@@ -42,19 +32,16 @@ async function loadWeightChart() {
         }
 
         if (!data.history || data.history.length === 0) {
-            console.log('⚠️ Нет данных для графика');
             canvas.style.display = 'none';
             emptyState.style.display = 'block';
             return;
         }
 
-        console.log('✅ Найдено записей:', data.history.length);
-
-        // Показываем график
+        // показываем график
         canvas.style.display = 'block';
         emptyState.style.display = 'none';
 
-        // Подготовка данных
+        // подготовка данных
         const labels = data.history.map(entry => {
             const date = new Date(entry.date);
             return date.toLocaleDateString('ru-RU', { day: '2-digit', month: '2-digit' });
@@ -65,12 +52,12 @@ async function loadWeightChart() {
         const minWeight = Math.min(...weights) - 1;
         const maxWeight = Math.max(...weights) + 1;
 
-        // Уничтожаем старый график
+        // уничтожаем старый график
         if (weightChart) {
             weightChart.destroy();
         }
 
-        // Создаём график
+        // создаём график
         weightChart = new Chart(canvas, {
             type: 'line',
             data: {
@@ -129,8 +116,6 @@ async function loadWeightChart() {
                 }
             }
         });
-
-        console.log('✅ График успешно создан');
     } catch (error) {
         console.error('❌ Ошибка загрузки графика:', error);
         const canvas = document.getElementById('weightChart');
@@ -140,9 +125,7 @@ async function loadWeightChart() {
     }
 }
 
-// ═══════════════════════════════════════════════════════
-// СОХРАНЕНИЕ ВЕСА
-// ═══════════════════════════════════════════════════════
+// сохранение веса
 
 function initWeightSaving() {
     const weightInput = document.getElementById('weightInput');
@@ -165,8 +148,6 @@ function initWeightSaving() {
             saveWeightBtn.disabled = true;
             saveWeightBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-1"></span>Сохранение...';
 
-            console.log('💾 Сохранение веса:', weight);
-
             const response = await fetch('/diabetes/api/weight', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -174,11 +155,10 @@ function initWeightSaving() {
             });
 
             if (response.ok) {
-                const result = await response.json();
-                console.log('✅ Вес сохранён:', result);
+                await response.json();
                 alert('Вес успешно сохранён!');
 
-                // Обновляем график
+                // обновляем график
                 await loadWeightChart();
             } else {
                 const error = await response.json();
@@ -193,13 +173,9 @@ function initWeightSaving() {
             saveWeightBtn.innerHTML = '<i class="bi bi-check2 me-1"></i>Сохранить';
         }
     });
-
-    console.log('✅ Сохранение веса инициализировано');
 }
 
-// ═══════════════════════════════════════════════════════
-// ЗАМЕРЫ ТЕЛА
-// ═══════════════════════════════════════════════════════
+// замеры тела
 
 function initBodyMeasurements() {
     const weightInput = document.getElementById('weightInput');
@@ -269,13 +245,9 @@ function initBodyMeasurements() {
             }
         });
     }
-
-    console.log('✅ Замеры тела инициализированы');
 }
 
-// ═══════════════════════════════════════════════════════
-// ГЛИКЕМИЧЕСКИЙ ИНДЕКС
-// ═══════════════════════════════════════════════════════
+// гликемический индекс
 
 function initGISearch() {
     const giSearchInput = document.getElementById('giSearchInput');
@@ -362,12 +334,9 @@ function initGISearch() {
     }
 
     loadPopularProducts();
-    console.log('✅ Поиск ГИ инициализирован');
 }
 
-// ═══════════════════════════════════════════════════════
-// КАЛЬКУЛЯТОР ХЛЕБНЫХ ЕДИНИЦ
-// ═══════════════════════════════════════════════════════
+// калькулятор хлебных единиц
 
 function initXECalculator() {
     const xeSearchInput = document.getElementById('xeSearchInput');
@@ -481,13 +450,9 @@ function initXECalculator() {
     if (xeWeightInput) {
         xeWeightInput.addEventListener('input', calculateXE);
     }
-
-    console.log('✅ Калькулятор ХЕ инициализирован');
 }
 
-// ═══════════════════════════════════════════════════════
-// HbA1c — ГЛИКИРОВАННЫЙ ГЕМОГЛОБИН
-// ═══════════════════════════════════════════════════════
+// hba1c — гликированный гемоглобин
 
 function initHbA1c() {
     const hba1cBtn = document.getElementById('hba1cBtn');
@@ -495,12 +460,12 @@ function initHbA1c() {
     const hba1cForm = document.getElementById('hba1cForm');
     const hba1cDateInput = document.getElementById('hba1cDateInput');
 
-    // Устанавливаем сегодняшнюю дату по умолчанию
+    // устанавливаем сегодняшнюю дату по умолчанию
     if (hba1cDateInput) {
         hba1cDateInput.valueAsDate = new Date();
     }
 
-    // Открытие модального окна
+    // открытие модального окна
     if (hba1cBtn) {
         hba1cBtn.addEventListener('click', async () => {
             hba1cModal.show();
@@ -508,7 +473,7 @@ function initHbA1c() {
         });
     }
 
-    // Сохранение замера
+    // сохранение замера
     if (hba1cForm) {
         hba1cForm.addEventListener('submit', async (e) => {
             e.preventDefault();
@@ -556,20 +521,18 @@ function initHbA1c() {
             }
         });
     }
-
-    console.log('✅ HbA1c инициализирован');
 }
 
 async function loadHbA1cData() {
     try {
-        // Загружаем последний результат
+        // загружаем последний результат
         const latestResponse = await fetch('/diabetes/api/hba1c/latest');
         if (latestResponse.ok) {
             const latestData = await latestResponse.json();
             displayLatestHbA1c(latestData.latest);
         }
 
-        // Загружаем историю
+        // загружаем историю
         const historyResponse = await fetch('/diabetes/api/hba1c/history');
         if (historyResponse.ok) {
             const historyData = await historyResponse.json();

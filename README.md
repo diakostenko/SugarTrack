@@ -67,8 +67,7 @@ SugarTrack/
 ├── README.md
 │
 ├── middleware/
-│ ├── auth.js
-│ └── apiAuth.js
+│ └── auth.js
 │
 ├── models/
 │ ├── User.js

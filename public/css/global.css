@@ -1,0 +1,88 @@
+/* глобальные переменные и базовые стили*/
+
+:root {
+    --page-bg: #17181f;
+    --card-bg: #21242d;
+    --card-border: #2e3240;
+    --text-main: #f3f4f8;
+    --text-muted: #b7bccd;
+    --accent: #8b5cf6;
+    --accent-soft: rgba(139, 92, 246, 0.18);
+    --input-bg: #141821;
+    --input-border: #3a3f53;
+}
+
+body {
+    background-color: var(--page-bg);
+    color: var(--text-main);
+}
+
+/* Глобальные стили форм */
+.form-control {
+    background-color: var(--input-bg);
+    border-color: var(--input-border);
+    color: var(--text-main);
+}
+
+.form-control:focus {
+    background-color: var(--input-bg);
+    border-color: var(--accent);
+    color: var(--text-main);
+    box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.2);
+}
+
+.form-control::placeholder {
+    color: var(--text-muted);
+    opacity: 0.6;
+}
+
+.form-select {
+    background-color: var(--input-bg);
+    border-color: var(--input-border);
+    color: var(--text-main);
+}
+
+.form-select:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 0.25rem rgba(139, 92, 246, 0.15);
+}
+
+.form-select option {
+    background-color: var(--input-bg);
+    color: var(--text-main);
+}
+
+.form-label {
+    color: var(--text-muted);
+    font-size: 13px;
+    font-weight: 600;
+}
+
+/* Глобальные стили для модальных окон */
+.modal-content {
+    background-color: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 16px;
+}
+
+.modal-header {
+    border-color: var(--card-border);
+}
+
+.modal-body {
+    color: var(--text-main);
+}
+
+/* Глобальные стили для кнопок */
+.btn-primary {
+    background-color: var(--accent);
+    border-color: var(--accent);
+}
+
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active {
+    background-color: #7c3aed;
+    border-color: #7c3aed;
+}
+

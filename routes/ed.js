@@ -5,7 +5,6 @@ import { User } from '../models/user.js';
 import { Meal } from '../models/Meal.js';
 import { Quote } from '../models/quote.js';
 import { requireAuth, requireUserType } from '../middleware/auth.js';
-import { requireAuth as requireAuthAPI, requireUserType as requireUserTypeAPI } from '../middleware/apiAuth.js';
 
 const router = express.Router();
 const staticDir = path.join(process.cwd(), 'public', 'ed');
@@ -215,7 +214,7 @@ router.get('/profile.html', async (req, res) => {
 // API: Получить данные дня (эмоциональный дневник)
 // ═══════════════════════════════════════════════════════
 
-router.get('/api/day/:date', requireAuthAPI, requireUserTypeAPI('ed'), async (req, res) => {
+router.get('/api/day/:date', requireAuth, requireUserType('ed'), async (req, res) => {
     try {
         const dateKey = normalizeDateKey(req.params.date);
         const { startOfDay, endOfDay } = getDayRange(dateKey);
@@ -249,7 +248,7 @@ router.get('/api/day/:date', requireAuthAPI, requireUserTypeAPI('ed'), async (re
 // ═══════════════════════════════════════════════════════
 
 
-router.post('/api/save-meal', requireAuthAPI, requireUserTypeAPI('ed'), async (req, res) => {
+router.post('/api/save-meal', requireAuth, requireUserType('ed'), async (req, res) => {
     try {
         const { date, mealType, rating, note } = req.body;
 
@@ -309,7 +308,7 @@ router.post('/api/save-meal', requireAuthAPI, requireUserTypeAPI('ed'), async (r
 // API: Получить данные за последние 30 дней (для диаграммы)
 // ═══════════════════════════════════════════════════════
 
-router.get('/api/emotion-chart', requireAuthAPI, requireUserTypeAPI('ed'), async (req, res) => {
+router.get('/api/emotion-chart', requireAuth, requireUserType('ed'), async (req, res) => {
     try {
         const today = new Date();
         today.setHours(0, 0, 0, 0);
@@ -354,7 +353,7 @@ router.get('/api/emotion-chart', requireAuthAPI, requireUserTypeAPI('ed'), async
 });
 
 // Статистика за последние 7 дней
-router.get('/api/weekly-stats', requireAuthAPI, requireUserTypeAPI('ed'), async (req, res) => {
+router.get('/api/weekly-stats', requireAuth, requireUserType('ed'), async (req, res) => {
     try {
         const now = new Date();
         const weekAgo = new Date(now);

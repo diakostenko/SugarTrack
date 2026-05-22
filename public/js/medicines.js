@@ -26,7 +26,7 @@ class MedicinesPage {
     }
 
     cacheElements() {
-        // Инсулин
+        // инсулин
         this.elements.insulinList = document.getElementById('insulinList');
         this.elements.insulinEmptyState = document.getElementById('insulinEmptyState');
         this.elements.insulinToday = document.getElementById('insulinToday');
@@ -40,7 +40,7 @@ class MedicinesPage {
         this.elements.insulinUnitsInput = document.getElementById('insulinUnits');
         this.elements.insulinDosesInput = document.getElementById('insulinDoses');
 
-        // Таблетки
+        // таблетки
         this.elements.pillsList = document.getElementById('pillsList');
         this.elements.pillsEmptyState = document.getElementById('pillsEmptyState');
         this.elements.pillsTotal = document.getElementById('pillsTotal');
@@ -52,7 +52,7 @@ class MedicinesPage {
         this.elements.pillNameInput = document.getElementById('pillName');
         this.elements.pillDosesInput = document.getElementById('pillDoses');
 
-        // Глюкоза
+        // глюкоза
         this.elements.glucoseChart = document.getElementById('glucoseChart');
         this.elements.glucoseChartEmpty = document.getElementById('glucoseChartEmpty');
         this.elements.glucoseInRange = document.getElementById('glucoseInRange');
@@ -72,7 +72,7 @@ class MedicinesPage {
 
     bindEvents() {
         document.addEventListener('click', (event) => {
-            // Инсулин
+            // инсулин
             const openInsulinButton = event.target.closest('.js-open-insulin-modal');
             if (openInsulinButton) {
                 this.openInsulinModal();
@@ -88,7 +88,7 @@ class MedicinesPage {
                 }
             }
 
-            // Таблетки
+            // таблетки
             const openPillButton = event.target.closest('.js-open-pill-modal');
             if (openPillButton) {
                 this.openPillModal();
@@ -131,7 +131,7 @@ class MedicinesPage {
             });
         }
 
-        // Глюкоза
+        // глюкоза
         if (this.elements.glucoseForm) {
             this.elements.glucoseForm.addEventListener('submit', (event) => {
                 event.preventDefault();
@@ -201,7 +201,7 @@ class MedicinesPage {
         }
     }
 
-    // ── Инсулин ──
+    // ── инсулин ──
 
     openInsulinModal() {
         this.resetInsulinForm();
@@ -279,7 +279,7 @@ class MedicinesPage {
         }
     }
 
-    // ── Таблетки ──
+    // ── таблетки ──
 
     openPillModal() {
         this.resetPillForm();
@@ -346,7 +346,7 @@ class MedicinesPage {
         }
     }
 
-    // ── Глюкоза ──
+    // ── глюкоза ──
 
     resetGlucoseForm() {
         if (!this.elements.glucoseForm) return;
@@ -394,7 +394,7 @@ class MedicinesPage {
         }
     }
 
-    // ── Рендер ──
+    // ── рендер ──
 
     render() {
         this.renderInsulinList();

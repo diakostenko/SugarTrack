@@ -113,24 +113,6 @@
 .gi-mid  { background: rgba(234,179,8,.15);  color: #facc15; }
 .gi-high { background: rgba(239,68,68,.15);  color: #f87171; }
 
-.form-control {
-    background-color: var(--input-bg);
-    border-color: var(--input-border);
-    color: var(--text-main);
-}
-
-.form-control:focus {
-    background-color: var(--input-bg);
-    border-color: var(--accent);
-    color: var(--text-main);
-    box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.2);
-}
-
-.form-control::placeholder {
-    color: var(--text-muted);
-    opacity: 0.6;
-}
-
 /* ── XE calc ── */
 .xe-result {
     background: rgba(139,92,246,.1);

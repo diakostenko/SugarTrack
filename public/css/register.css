@@ -1,20 +1,6 @@
 :root {
-    --page-bg: #17181f;
-    --card-bg: #21242d;
-    --card-border: #2e3240;
-    --text-main: #f3f4f8;
-    --text-muted: #b7bccd;
-    --accent: #8b5cf6;
     --accent-hover: #7c3aed;
-    --input-bg: #181b23;
-    --input-border: #34384a;
     --focus-ring: rgba(139, 92, 246, 0.25);
-}
-
-body {
-    min-height: 100vh;
-    background-color: var(--page-bg);
-    color: var(--text-main);
 }
 
 .register-card {
@@ -57,7 +43,7 @@ body {
     background-color: var(--input-bg);
     border-color: var(--accent);
     color: var(--text-main);
-    box-shadow: 0 0 0 0.25rem var(--focus-ring);
+    box-shadow: 0 0 0 0.25rem var(--focus-ring, rgba(139, 92, 246, 0.25));
 }
 
 .register-card .form-select option {
@@ -74,8 +60,8 @@ body {
 .register-card .btn-primary:hover,
 .register-card .btn-primary:focus,
 .register-card .btn-primary:active {
-    background-color: var(--accent-hover);
-    border-color: var(--accent-hover);
+    background-color: var(--accent-hover, #7c3aed);
+    border-color: var(--accent-hover, #7c3aed);
 }
 
 .feature-panel {
@@ -111,7 +97,7 @@ body {
 
 .register-card .form-check-input:focus {
     border-color: var(--accent);
-    box-shadow: 0 0 0 0.25rem var(--focus-ring);
+    box-shadow: 0 0 0 0.25rem var(--focus-ring, rgba(139, 92, 246, 0.25));
 }
 
 .register-card .form-check-label {
@@ -120,7 +106,7 @@ body {
 
 /* Стили для ссылок */
 .register-card a:hover {
-    color: var(--accent-hover) !important;
+    color: var(--accent-hover, #7c3aed) !important;
 }
 
 /* Дополнительные отступы для блока ссылок */

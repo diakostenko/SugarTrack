@@ -28,7 +28,7 @@ class EatDiary {
     }
 
     setupEventListeners() {
-        // Кнопки навигации по датам
+        // кнопки навигации по датам
         document.addEventListener('click', (e) => {
             if (e.target.closest('.day-btn')) {
                 const btn = e.target.closest('.day-btn');
@@ -36,30 +36,30 @@ class EatDiary {
                 this.changeDate(offset);
             }
 
-            // Добавить продукт
+            // добавить продукт
             if (e.target.closest('.meal-card__add')) {
                 const mealType = e.target.closest('.meal-section').dataset.mealType;
                 this.openAddFoodModal(mealType);
             }
 
-            // Удалить продукт
+            // удалить продукт
             if (e.target.closest('.delete-food-btn')) {
                 const foodId = e.target.closest('.delete-food-btn').dataset.foodId;
                 const mealId = e.target.closest('.meal-section').dataset.mealId;
                 this.deleteFood(mealId, foodId);
             }
 
-            // Добавить приём пищи
+            // добавить приём пищи
             if (e.target.closest('#addMealBtn')) {
                 this.openAddMealModal();
             }
 
-            // Добавить воду
+            // добавить воду
             if (e.target.closest('#addWaterBtn')) {
                 this.addWater();
             }
 
-            // Клик по стакану воды
+            // клик по стакану воды
             if (e.target.closest('.water-cup')) {
                 const index = parseInt(e.target.closest('.water-cup').dataset.index);
                 this.toggleWater(index);
@@ -73,7 +73,7 @@ class EatDiary {
 
         const days = ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'];
 
-        // Показываем 7 дней: 3 назад, сегодня, 3 вперёд
+        // показываем 7 дней: 3 назад, сегодня, 3 вперёд
         for (let i = -3; i <= 3; i++) {
             const date = new Date(this.currentDate);
             date.setDate(date.getDate() + i);
@@ -208,7 +208,7 @@ class EatDiary {
       `;
         }
 
-        // Обновляем прогресс
+        // обновляем прогресс
         const waterProgress = (this.water.amount / this.dailyGoals.water) * 100;
         document.querySelector('.water-progress-bar').style.width = `${waterProgress}%`;
         document.querySelector('.water-amount').textContent = this.water.amount;
@@ -224,18 +224,18 @@ class EatDiary {
             });
         };
 
-        // Обновляем калории
+        // обновляем калории
         setTextAll('.total-calories', totals.calories);
         const calProgress = (totals.calories / this.dailyGoals.calories) * 100;
         document.querySelector('.cal-progress-bar').style.width = `${calProgress}%`;
         document.querySelector('.cal-percent').textContent = Math.round(calProgress);
 
-        // Обновляем БЖУ
+        // обновляем бжу
         setTextAll('.total-carbs', Math.round(totals.carbs));
         setTextAll('.total-protein', Math.round(totals.protein));
         setTextAll('.total-fat', Math.round(totals.fat));
 
-        // Обновляем диаграмму
+        // обновляем диаграмму
         this.updateDonutChart(totals);
     }
 
@@ -265,7 +265,7 @@ class EatDiary {
       #2e3240 ${fatDeg}deg 360deg
     )`;
 
-        // Обновляем легенду
+        // обновляем легенду
         document.querySelector('.carbs-percent').textContent = Math.round(carbsPercent);
         document.querySelector('.protein-percent').textContent = Math.round(proteinPercent);
         document.querySelector('.fat-percent').textContent = Math.round(fatPercent);
@@ -296,10 +296,7 @@ class EatDiary {
         try {
             const dateStr = this.getDateKey();
 
-            // Если стакан заполнен - убираем, иначе добавляем
             const endpoint = index < this.water.glasses ? 'remove' : 'add';
-
-            // Нужно добавить/убрать столько стаканов, чтобы достичь нужного индекса
             const targetGlasses = index + 1;
             const diff = Math.abs(targetGlasses - this.water.glasses);
 
@@ -408,7 +405,7 @@ class EatDiary {
 
         let selectedProduct = null;
 
-        // Поиск продуктов
+        // поиск продуктов
         const searchBtn = modal.querySelector('#searchBtn');
         const searchInput = modal.querySelector('#foodSearchInput');
 
@@ -448,7 +445,7 @@ class EatDiary {
             }
         });
 
-        // Изменение веса - пересчёт КБЖУ
+        // изменение веса - пересчёт кбжу
         const weightInput = modal.querySelector('#foodWeight');
         weightInput.addEventListener('input', () => {
             if (selectedProduct) {
@@ -456,7 +453,7 @@ class EatDiary {
             }
         });
 
-        // Добавление продукта
+        // добавление продукта
         modal.querySelector('#confirmAddFood').addEventListener('click', async () => {
             await this.addFoodToMeal(mealType, selectedProduct, parseFloat(weightInput.value));
             bsModal.hide();
@@ -511,7 +508,7 @@ class EatDiary {
       </div>
     `;
 
-        // Обработка выбора продукта
+        // обработка выбора продукта
         container.querySelectorAll('.search-result-item').forEach((item, index) => {
             item.addEventListener('click', () => {
                 onSelect(products[index]);
@@ -543,18 +540,16 @@ class EatDiary {
 
     async addFoodToMeal(mealType, product, weight) {
         try {
-            console.log('Добавляем продукт:', { mealType, product, weight });
-
             const dateStr = this.getDateKey();
 
             const mealTimes = {
                 breakfast: '07:30',
                 lunch: '13:00',
-                snack: '16:30',
+                snacks: '16:30',
                 dinner: '19:00'
             };
 
-            // Вычисляем КБЖУ на основе веса
+            // вычисляем кбжу на основе веса
             const multiplier = weight / 100;
 
             const foodData = {
@@ -566,8 +561,6 @@ class EatDiary {
                 protein: Math.round(product.per100g.protein * multiplier * 10) / 10,
                 fat: Math.round(product.per100g.fat * multiplier * 10) / 10
             };
-
-            console.log('Отправляем данные:', foodData);
 
             const response = await fetch('/api/meals/add-food', {
                 method: 'POST',
@@ -583,23 +576,20 @@ class EatDiary {
                 })
             });
 
-            console.log('Ответ сервера статус:', response.status);
-
             if (!response.ok) {
                 const errorData = await response.json();
                 console.error('Ошибка от сервера:', errorData);
                 throw new Error(errorData.error || 'Ошибка добавления продукта');
             }
 
-            const data = await response.json();
-            console.log('Продукт успешно добавлен:', data);
+            await response.json();
 
-            // Закрываем модалку
+            // закрываем модалку
             const modalElement = document.getElementById('addFoodModal');
             const modal = bootstrap.Modal.getInstance(modalElement);
             if (modal) modal.hide();
 
-            // Перезагружаем данные
+            // перезагружаем данные
             await this.loadDayData();
 
             this.showSuccess('Продукт добавлен!');
@@ -632,7 +622,7 @@ class EatDiary {
     }
 
     openAddMealModal() {
-        // Можно добавить модальное окно для создания кастомного приёма пищи
+        // можно добавить модальное окно для создания кастомного приёма пищи
         this.showInfo('Выберите приём пищи и добавьте продукт');
     }
 
@@ -662,7 +652,7 @@ class EatDiary {
     }
 }
 
-// Инициализация при загрузке страницы
+// инициализация при загрузке страницы
 document.addEventListener('DOMContentLoaded', () => {
     new EatDiary();
 });

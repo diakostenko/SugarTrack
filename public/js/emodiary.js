@@ -1,6 +1,4 @@
-// ═══════════════════════════════════════════════════════
-// ЭМОЦИОНАЛЬНЫЙ ДНЕВНИК — Класс EmoDiary
-// ═══════════════════════════════════════════════════════
+// эмоциональный дневник — класс emodiary
 
 class EmoDiary {
     constructor() {
@@ -18,9 +16,7 @@ class EmoDiary {
         await this.loadChartData();
     }
 
-    // ───────────────────────────────────────────────────
-    // Работа с датами
-    // ───────────────────────────────────────────────────
+    // работа с датами
 
     getDateKey(date = this.currentDate) {
         const year = date.getFullYear();
@@ -61,9 +57,7 @@ class EmoDiary {
         this.loadDayData();
     }
 
-    // ───────────────────────────────────────────────────
-    // Загрузка данных с сервера
-    // ───────────────────────────────────────────────────
+    // загрузка данных с сервера
 
     async loadDayData() {
         try {
@@ -89,9 +83,7 @@ class EmoDiary {
         }
     }
 
-    // ───────────────────────────────────────────────────
-    // Рендеринг карточек приёмов пищи
-    // ───────────────────────────────────────────────────
+    // рендеринг карточек приёмов пищи
 
     render() {
         const container = document.querySelector('.meals-container');
@@ -117,7 +109,7 @@ class EmoDiary {
         const moodText = this.getMoodText(meal.moodRating);
         const moodClass = meal.moodRating ? `mood-${meal.moodRating}` : '';
 
-        // Проверяем наличие заметки (учитываем null, undefined, пустую строку)
+        // проверка наличия заметки
         const hasSavedNote = meal.note && meal.note.trim().length > 0;
 
         if (meal.moodRating) {
@@ -200,9 +192,7 @@ class EmoDiary {
         `;
     }
 
-    // ───────────────────────────────────────────────────
-    // Обработчики событий
-    // ───────────────────────────────────────────────────
+    // обработчики событий
 
     setupEventListeners() {
         document.addEventListener('click', (e) => {
@@ -269,9 +259,7 @@ class EmoDiary {
         }
     }
 
-    // ───────────────────────────────────────────────────
-    // Сохранение приёма пищи
-    // ───────────────────────────────────────────────────
+    // сохранение приёма пищи
 
     async saveMeal(mealType) {
         const rating = this.selectedRatings[mealType];
@@ -310,7 +298,7 @@ class EmoDiary {
 
             const data = await response.json();
 
-            // Обновляем this.meals с новыми данными
+            // обновляем this.meals с новыми данными
             const mealIndex = this.meals.findIndex(m => m.mealType === mealType);
             if (mealIndex !== -1) {
                 this.meals[mealIndex] = {
@@ -326,7 +314,7 @@ class EmoDiary {
                 });
             }
 
-            // Переключаемся на режим просмотра
+            // переключаемся на режим просмотра
             this.switchToViewMode(mealType, note);
             this.showSuccess('Запись сохранена!');
 
@@ -339,9 +327,7 @@ class EmoDiary {
         }
     }
 
-    // ───────────────────────────────────────────────────
-    // Переключение между режимами
-    // ───────────────────────────────────────────────────
+    // переключение между режимами
 
     switchToViewMode(mealType, noteText) {
         const form = document.getElementById(`${mealType}-note-form`);
@@ -365,9 +351,7 @@ class EmoDiary {
         }
     }
 
-    // ───────────────────────────────────────────────────
-    // Очистка
-    // ───────────────────────────────────────────────────
+    // очистка
 
     async clearMeal(mealType) {
         if (!confirm('Вы уверены, что хотите удалить эту запись?')) {
@@ -408,7 +392,7 @@ class EmoDiary {
                 badge.className = 'ed-meal-card__mood';
             }
 
-            // Обновляем this.meals
+            // обновляем this.meals
             const mealIndex = this.meals.findIndex(m => m.mealType === mealType);
             if (mealIndex !== -1) {
                 this.meals[mealIndex].note = '';
@@ -573,9 +557,7 @@ class EmoDiary {
         });
     }
 
-    // ───────────────────────────────────────────────────
-    // Вспомогательные методы
-    // ───────────────────────────────────────────────────
+    // вспомогательные методы
 
     escapeHtml(text) {
         const map = {
@@ -611,11 +593,8 @@ class EmoDiary {
     }
 }
 
-// ═══════════════════════════════════════════════════════
-// Инициализация при загрузке страницы
-// ═══════════════════════════════════════════════════════
+// инициализация при загрузке страницы
 
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('Страница emodiary.html загружена');
     new EmoDiary();
 });

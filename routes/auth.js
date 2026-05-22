@@ -186,7 +186,7 @@ router.post('/logout', (req, res) => {
         console.log('Выход из аккаунта');
 
         // Удаляем cookie с токеном
-        res.clearCookie('token', {
+        res.clearCookie('authToken', {
             httpOnly: true,
             secure: process.env.NODE_ENV === 'production',
             sameSite: 'strict'

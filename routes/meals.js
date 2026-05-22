@@ -2,7 +2,7 @@ import express from 'express';
 import { Meal } from '../models/Meal.js';
 import { WaterIntake } from '../models/WaterIntake.js';
 import { Product } from '../models/Product.js';
-import { requireAuth, requireUserType } from '../middleware/apiAuth.js';
+import { requireAuth, requireUserType } from '../middleware/auth.js';
 
 const router = express.Router();
 
