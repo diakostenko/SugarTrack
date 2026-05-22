@@ -17,7 +17,7 @@ const app = express();
 app.use(express.json());
 app.use('/auth', authRouter);
 app.use('/diabetes', diabetesRouter);
-app.use('/ed', edRouter);
+app.use('/api/medicines', diabetesRouter);
 app.use('/ed', edRouter);
 app.use('/api/meals', mealsRouter);
 app.use(express.static('public'));

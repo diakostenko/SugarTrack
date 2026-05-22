@@ -37,6 +37,27 @@
         </div>
     </nav>
 
+    <!-- ── HbA1c Button (неприметная кнопка) ── -->
+    <div class="container-xxl px-3 px-md-4">
+        <button
+                type="button"
+                class="btn btn-sm"
+                id="hba1cBtn"
+                style="
+            background: rgba(139, 92, 246, 0.1);
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            color: var(--text-muted);
+            font-size: 12px;
+            font-weight: 600;
+            padding: 6px 14px;
+            border-radius: 999px;
+            margin-bottom: 16px;
+        "
+        >
+            <i class="bi bi-clipboard-data me-1"></i>Гликированный гемоглобин (HbA1c)
+        </button>
+    </div>
+
     <main class="container-xxl px-3 px-md-4 pb-5">
 
         <!-- ══════════════════════════════════
@@ -88,7 +109,7 @@
                 </div>
             </div>
 
-            <!-- Диаграмма веса (статика, заглушка для Chart.js) -->
+            <!-- Диаграмма веса -->
             <div class="col-12 col-lg-8">
                 <div class="card register-card border-0 shadow-lg h-100">
                     <div class="card-body p-4">
@@ -97,80 +118,17 @@
                                 <span class="badge dash-badge mb-2">График</span>
                                 <h5 class="fw-bold mb-0">Динамика веса за 2 недели</h5>
                             </div>
-                            <span style="font-size:12px;color:var(--text-muted);padding-top:4px;">В будущем — Chart.js</span>
                         </div>
 
-                        <div class="chart-wrap mb-2">
-                            <div class="chart-bar-col">
-                                <span class="chart-val">75.1</span>
-                                <div class="chart-bar" style="height:72%"></div>
-                                <span class="chart-label">24.02</span>
-                            </div>
-                            <div class="chart-bar-col">
-                                <span class="chart-val">74.8</span>
-                                <div class="chart-bar" style="height:68%"></div>
-                                <span class="chart-label">25.02</span>
-                            </div>
-                            <div class="chart-bar-col">
-                                <span class="chart-val">75.3</span>
-                                <div class="chart-bar" style="height:75%"></div>
-                                <span class="chart-label">26.02</span>
-                            </div>
-                            <div class="chart-bar-col">
-                                <span class="chart-val">74.9</span>
-                                <div class="chart-bar" style="height:70%"></div>
-                                <span class="chart-label">27.02</span>
-                            </div>
-                            <div class="chart-bar-col">
-                                <span class="chart-val">74.6</span>
-                                <div class="chart-bar" style="height:65%"></div>
-                                <span class="chart-label">28.02</span>
-                            </div>
-                            <div class="chart-bar-col">
-                                <span class="chart-val">74.2</span>
-                                <div class="chart-bar" style="height:60%"></div>
-                                <span class="chart-label">01.03</span>
-                            </div>
-                            <div class="chart-bar-col">
-                                <span class="chart-val">74.7</span>
-                                <div class="chart-bar" style="height:66%"></div>
-                                <span class="chart-label">02.03</span>
-                            </div>
-                            <div class="chart-bar-col">
-                                <span class="chart-val">75.0</span>
-                                <div class="chart-bar" style="height:70%"></div>
-                                <span class="chart-label">03.03</span>
-                            </div>
-                            <div class="chart-bar-col">
-                                <span class="chart-val">74.8</span>
-                                <div class="chart-bar" style="height:68%"></div>
-                                <span class="chart-label">04.03</span>
-                            </div>
-                            <div class="chart-bar-col">
-                                <span class="chart-val">74.3</span>
-                                <div class="chart-bar" style="height:62%"></div>
-                                <span class="chart-label">05.03</span>
-                            </div>
-                            <div class="chart-bar-col">
-                                <span class="chart-val">74.1</span>
-                                <div class="chart-bar" style="height:59%"></div>
-                                <span class="chart-label">06.03</span>
-                            </div>
-                            <div class="chart-bar-col">
-                                <span class="chart-val">74.6</span>
-                                <div class="chart-bar" style="height:65%"></div>
-                                <span class="chart-label">07.03</span>
-                            </div>
-                            <div class="chart-bar-col">
-                                <span class="chart-val">74.5</span>
-                                <div class="chart-bar" style="height:64%"></div>
-                                <span class="chart-label">09.03</span>
-                            </div>
-                            <div class="chart-bar-col">
-                                <span class="chart-val">74.5</span>
-                                <div class="chart-bar highlight" style="height:64%"></div>
-                                <span class="chart-label" style="color:var(--accent);">Сег.</span>
-                            </div>
+                        <!-- Chart.js Canvas -->
+                        <div style="position: relative; height: 220px;">
+                            <canvas id="weightChart"></canvas>
+                        </div>
+
+                        <div id="weightChartEmpty" style="display:none;text-align:center;padding:60px 20px;color:var(--text-muted);">
+                            <i class="bi bi-graph-down" style="font-size:48px;opacity:0.3;"></i>
+                            <p style="margin-top:12px;font-size:14px;">Нет данных для отображения графика</p>
+                            <p style="font-size:12px;">Сохраните первый замер веса</p>
                         </div>
                     </div>
                 </div>
@@ -414,6 +372,102 @@
 
         </div>
     </main>
+
+    <!-- ═══ МОДАЛЬНОЕ ОКНО HbA1c ═══ -->
+    <div class="modal fade" id="hba1cModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content" style="background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 16px;">
+                <div class="modal-header" style="border-bottom: 1px solid var(--card-border);">
+                    <h5 class="modal-title fw-bold" style="color: var(--text-main);">
+                        <i class="bi bi-clipboard-data me-2" style="color: var(--accent);"></i>
+                        Гликированный гемоглобин
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" style="filter: invert(1);"></button>
+                </div>
+                <div class="modal-body p-4">
+
+                    <!-- Последний результат -->
+                    <div id="hba1cLatest" style="display:none; margin-bottom: 24px;">
+                        <div style="font-size: 12px; color: var(--text-muted); font-weight: 600; margin-bottom: 8px;">ПОСЛЕДНИЙ РЕЗУЛЬТАТ</div>
+                        <div style="background: rgba(139, 92, 246, 0.1); border: 1px solid rgba(139, 92, 246, 0.3); border-radius: 12px; padding: 16px;">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <div>
+                                    <div style="font-size: 32px; font-weight: 800; color: var(--text-main); line-height: 1;" id="hba1cLatestValue">—</div>
+                                    <div style="font-size: 13px; color: var(--text-muted); margin-top: 4px;" id="hba1cLatestDate">—</div>
+                                </div>
+                                <div>
+                                    <span id="hba1cLatestBadge" class="gi-badge">—</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Форма добавления -->
+                    <form id="hba1cForm">
+                        <div class="mb-3">
+                            <label class="form-label" style="font-size: 12px; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">
+                                Значение HbA1c (%)
+                            </label>
+                            <input
+                                    type="number"
+                                    class="form-control"
+                                    id="hba1cValueInput"
+                                    placeholder="5.7"
+                                    step="0.1"
+                                    min="3"
+                                    max="20"
+                                    required
+                                    style="font-size: 18px; font-weight: 700; text-align: center;"
+                            >
+                            <small style="color: var(--text-muted); font-size: 11px; display: block; margin-top: 6px;">
+                                Норма: &lt; 5.7% | Преддиабет: 5.7–6.4% | Диабет: ≥ 6.5%
+                            </small>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label" style="font-size: 12px; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">
+                                Дата замера
+                            </label>
+                            <input
+                                    type="date"
+                                    class="form-control"
+                                    id="hba1cDateInput"
+                                    required
+                            >
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="form-label" style="font-size: 12px; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">
+                                Примечание (опционально)
+                            </label>
+                            <textarea
+                                    class="form-control"
+                                    id="hba1cNoteInput"
+                                    rows="2"
+                                    placeholder="Комментарий к замеру..."
+                            ></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary w-100" id="hba1cSaveBtn">
+                            <i class="bi bi-check2 me-1"></i>Сохранить замер
+                        </button>
+                    </form>
+
+                    <!-- История -->
+                    <div id="hba1cHistory" style="margin-top: 24px; display: none;">
+                        <div style="font-size: 12px; color: var(--text-muted); font-weight: 600; margin-bottom: 12px;">ИСТОРИЯ ЗА ГОД</div>
+                        <div id="hba1cHistoryList" style="max-height: 200px; overflow-y: auto;">
+                            <!-- Записи истории -->
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
     <script src="../js/measurements.js"></script>
 </body>
 </html>

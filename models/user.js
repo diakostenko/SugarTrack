@@ -61,7 +61,18 @@ const userSchema = new Schema({
 			diaryFrequency: { type: String }
 		},
 		default: null
-	}
+	},
+	events: [{
+		type: { type: String, enum: ['pill', 'dose', 'doctor'], required: true },
+		title: { type: String, required: true },
+		date: { type: String, required: true }, // YYYY-MM-DD
+		description: String,
+		createdAt: { type: Date, default: Date.now }
+	}],
+	weightHistory: [{
+		date: { type: String, required: true }, // YYYY-MM-DD
+		weight: { type: Number, required: true, min: 0 }
+	}]
 });
 
 // Виртуальное поле ИМТ
@@ -86,6 +97,8 @@ userSchema.methods.getBMICategory = function() {
 	if (bmi < 40) return 'Ожирение 2 степени';
 	return 'Ожирение 3 степени';
 };
+
+
 
 userSchema.set('toJSON', { virtuals: true });
 userSchema.set('toObject', { virtuals: true });

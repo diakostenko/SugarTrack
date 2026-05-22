@@ -148,6 +148,17 @@ body {
     grid-column: span 2;
 }
 
+.btn-danger:hover {
+    background: rgba(239, 68, 68, 0.25) !important;
+    border-color: rgba(239, 68, 68, 0.5) !important;
+    color: #ff6b6b !important;
+}
+
+.btn-danger:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
 @media (max-width: 991px) {
     .profile-info-item-bmi-wide {
         grid-column: span 1;

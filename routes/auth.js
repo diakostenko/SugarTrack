@@ -180,6 +180,33 @@ router.post('/login', loginLimiter, async (req, res) => {
     }
 });
 
+
+router.post('/logout', (req, res) => {
+    try {
+        console.log('Выход из аккаунта');
+
+        // Удаляем cookie с токеном
+        res.clearCookie('token', {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === 'production',
+            sameSite: 'strict'
+        });
+
+        console.log('Токен удалён, сессия завершена');
+
+        return res.json({
+            success: true,
+            message: 'Выход выполнен успешно'
+        });
+    } catch (error) {
+        console.error('Ошибка при выходе:', error);
+        return res.status(500).json({
+            success: false,
+            error: 'Ошибка сервера'
+        });
+    }
+});
+
 export default router;
 
 

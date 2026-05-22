@@ -6,12 +6,25 @@ import { requireAuth, requireUserType } from '../middleware/apiAuth.js';
 
 const router = express.Router();
 
+function getDayRange(dateValue) {
+    const [year, month, day] = String(dateValue || '').split('-').map(Number);
+
+    if (!year || !month || !day) {
+        const now = new Date();
+        const start = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+        const end = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 23, 59, 59, 999);
+        return { startOfDay: start, endOfDay: end };
+    }
+
+    const startOfDay = new Date(year, month - 1, day, 0, 0, 0, 0);
+    const endOfDay = new Date(year, month - 1, day, 23, 59, 59, 999);
+    return { startOfDay, endOfDay };
+}
+
 // Получить все приёмы пищи за день
 router.get('/day/:date', requireAuth, requireUserType('diabetes'), async (req, res) => {
     try {
-        const date = new Date(req.params.date);
-        const startOfDay = new Date(date.setHours(0, 0, 0, 0));
-        const endOfDay = new Date(date.setHours(23, 59, 59, 999));
+        const { startOfDay, endOfDay } = getDayRange(req.params.date);
 
         const meals = await Meal.find({
             userId: req.user.userId,
@@ -75,9 +88,7 @@ router.post('/add-food', requireAuth, requireUserType('diabetes'), async (req, r
             return res.status(400).json({ error: 'Не все данные переданы' });
         }
 
-        const mealDate = new Date(date);
-        const startOfDay = new Date(mealDate.setHours(0, 0, 0, 0));
-        const endOfDay = new Date(mealDate.setHours(23, 59, 59, 999));
+        const { startOfDay, endOfDay } = getDayRange(date);
 
         // Ищем существующий приём пищи
         let meal = await Meal.findOne({
@@ -248,9 +259,7 @@ router.get('/products/:id', requireAuth, requireUserType('diabetes'), async (req
 // Вода - получить за день
 router.get('/water/:date', requireAuth, requireUserType('diabetes'), async (req, res) => {
     try {
-        const date = new Date(req.params.date);
-        const startOfDay = new Date(date.setHours(0, 0, 0, 0));
-        const endOfDay = new Date(date.setHours(23, 59, 59, 999));
+        const { startOfDay, endOfDay } = getDayRange(req.params.date);
 
         let water = await WaterIntake.findOne({
             userId: req.user.userId,
@@ -277,9 +286,7 @@ router.get('/water/:date', requireAuth, requireUserType('diabetes'), async (req,
 // Вода - добавить стакан
 router.post('/water/:date/add', requireAuth, requireUserType('diabetes'), async (req, res) => {
     try {
-        const date = new Date(req.params.date);
-        const startOfDay = new Date(date.setHours(0, 0, 0, 0));
-        const endOfDay = new Date(date.setHours(23, 59, 59, 999));
+        const { startOfDay, endOfDay } = getDayRange(req.params.date);
 
         let water = await WaterIntake.findOne({
             userId: req.user.userId,
@@ -309,9 +316,7 @@ router.post('/water/:date/add', requireAuth, requireUserType('diabetes'), async 
 // Вода - убрать стакан
 router.post('/water/:date/remove', requireAuth, requireUserType('diabetes'), async (req, res) => {
     try {
-        const date = new Date(req.params.date);
-        const startOfDay = new Date(date.setHours(0, 0, 0, 0));
-        const endOfDay = new Date(date.setHours(23, 59, 59, 999));
+        const { startOfDay, endOfDay } = getDayRange(req.params.date);
 
         const water = await WaterIntake.findOne({
             userId: req.user.userId,

@@ -20,6 +20,13 @@ class EatDiary {
         await this.loadDayData();
     }
 
+    getDateKey(date = this.currentDate) {
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate()).padStart(2, '0');
+        return `${year}-${month}-${day}`;
+    }
+
     setupEventListeners() {
         // Кнопки навигации по датам
         document.addEventListener('click', (e) => {
@@ -90,7 +97,7 @@ class EatDiary {
 
     async loadDayData() {
         try {
-            const dateStr = this.currentDate.toISOString().split('T')[0];
+            const dateStr = this.getDateKey();
             const response = await fetch(`/api/meals/day/${dateStr}`, {
                 headers: {
                     'Authorization': `Bearer ${localStorage.getItem('token')}`
@@ -211,16 +218,22 @@ class EatDiary {
     renderStats() {
         const totals = this.dailyTotals || { calories: 0, carbs: 0, protein: 0, fat: 0 };
 
+        const setTextAll = (selector, value) => {
+            document.querySelectorAll(selector).forEach((el) => {
+                el.textContent = value;
+            });
+        };
+
         // Обновляем калории
-        document.querySelector('.total-calories').textContent = totals.calories;
+        setTextAll('.total-calories', totals.calories);
         const calProgress = (totals.calories / this.dailyGoals.calories) * 100;
         document.querySelector('.cal-progress-bar').style.width = `${calProgress}%`;
         document.querySelector('.cal-percent').textContent = Math.round(calProgress);
 
         // Обновляем БЖУ
-        document.querySelector('.total-carbs').textContent = Math.round(totals.carbs);
-        document.querySelector('.total-protein').textContent = Math.round(totals.protein);
-        document.querySelector('.total-fat').textContent = Math.round(totals.fat);
+        setTextAll('.total-carbs', Math.round(totals.carbs));
+        setTextAll('.total-protein', Math.round(totals.protein));
+        setTextAll('.total-fat', Math.round(totals.fat));
 
         // Обновляем диаграмму
         this.updateDonutChart(totals);
@@ -231,6 +244,9 @@ class EatDiary {
 
         if (totalGrams === 0) {
             document.querySelector('.donut').style.background = '#2e3240';
+            document.querySelector('.carbs-percent').textContent = '0';
+            document.querySelector('.protein-percent').textContent = '0';
+            document.querySelector('.fat-percent').textContent = '0';
             return;
         }
 
@@ -257,7 +273,7 @@ class EatDiary {
 
     async addWater() {
         try {
-            const dateStr = this.currentDate.toISOString().split('T')[0];
+            const dateStr = this.getDateKey();
             const response = await fetch(`/api/meals/water/${dateStr}/add`, {
                 method: 'POST',
                 headers: {
@@ -278,7 +294,7 @@ class EatDiary {
 
     async toggleWater(index) {
         try {
-            const dateStr = this.currentDate.toISOString().split('T')[0];
+            const dateStr = this.getDateKey();
 
             // Если стакан заполнен - убираем, иначе добавляем
             const endpoint = index < this.water.glasses ? 'remove' : 'add';
@@ -529,7 +545,7 @@ class EatDiary {
         try {
             console.log('Добавляем продукт:', { mealType, product, weight });
 
-            const dateStr = this.currentDate.toISOString().split('T')[0];
+            const dateStr = this.getDateKey();
 
             const mealTimes = {
                 breakfast: '07:30',

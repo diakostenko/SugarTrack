@@ -47,70 +47,54 @@
             <!-- Инсулин -->
             <div class="col-12 col-lg-6">
                 <div class="card register-card border-0 shadow-lg h-100">
-                    <div class="card-body p-4">
+                    <div class="card-body p-4 medicine-tracker-card-body">
                         <div class="d-flex align-items-start justify-content-between gap-3 mb-4">
                             <div>
                                 <span class="badge dash-badge mb-2">Инсулин</span>
                                 <h5 class="fw-bold mb-0">Инъекции инсулина</h5>
                             </div>
-                            <button class="btn btn-primary btn-sm px-3" type="button" disabled>
+                            <button class="btn btn-primary btn-sm px-3 js-open-insulin-modal" type="button">
                                 <i class="bi bi-plus-lg me-1"></i>Добавить
                             </button>
                         </div>
 
-                        <!-- Препарат 1 -->
-                        <div class="med-item">
-                            <div class="med-icon med-icon--insulin">
-                                <i class="bi bi-droplet-fill"></i>
-                            </div>
-                            <div class="med-info">
-                                <div class="med-name">Новорапид ФлексПен</div>
-                                <div class="med-detail">Быстрый · 4 ед. · до еды</div>
-                            </div>
-                            <div class="med-doses">
-                                <div class="dose-dot taken" title="Завтрак"><i class="bi bi-check2"></i></div>
-                                <div class="dose-dot taken" title="Обед"><i class="bi bi-check2"></i></div>
-                                <div class="dose-dot" title="Ужин">У</div>
+                        <div class="medicine-tracker-content">
+                            <div id="insulinList"></div>
+
+                            <div class="insulin-empty-state" id="insulinEmptyState">
+                                <div class="insulin-empty-state__icon">
+                                    <i class="bi bi-droplet-half"></i>
+                                </div>
+                                <div class="fw-bold mt-2">Пока нет добавленных препаратов</div>
+                                <div class="text-muted small mt-1">Нажмите «Добавить», чтобы внести короткий или длинный инсулин.</div>
                             </div>
                         </div>
 
-                        <!-- Препарат 2 -->
-                        <div class="med-item">
-                            <div class="med-icon med-icon--insulin">
-                                <i class="bi bi-droplet-fill"></i>
-                            </div>
-                            <div class="med-info">
-                                <div class="med-name">Лантус СолоСтар</div>
-                                <div class="med-detail">Длинный · 14 ед. · вечером</div>
-                            </div>
-                            <div class="med-doses">
-                                <div class="dose-dot" title="Вечер">В</div>
-                            </div>
-                        </div>
+                        <div class="medicine-tracker-footer">
+                            <button class="add-med-btn js-open-insulin-modal" type="button">
+                                <i class="bi bi-plus-circle" style="color:var(--accent);font-size:16px;"></i>
+                                Добавить препарат инсулина
+                            </button>
 
-                        <button class="add-med-btn" type="button" disabled>
-                            <i class="bi bi-plus-circle" style="color:var(--accent);font-size:16px;"></i>
-                            Добавить препарат инсулина
-                        </button>
-
-                        <!-- Статистика сегодня -->
-                        <div class="row g-2 mt-3">
-                            <div class="col-4">
-                                <div class="dash-stat-card text-center py-2">
-                                    <div class="dash-stat-label">Сегодня</div>
-                                    <div style="font-size:22px;font-weight:800;color:var(--text-main);">8 ед.</div>
+                            <!-- Статистика сегодня -->
+                            <div class="row g-2 mt-3">
+                                <div class="col-4">
+                                    <div class="dash-stat-card text-center py-2">
+                                        <div class="dash-stat-label">Сегодня</div>
+                                        <div class="medicine-stat-value" id="insulinToday">0 ед.</div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-4">
-                                <div class="dash-stat-card text-center py-2">
-                                    <div class="dash-stat-label">Норма</div>
-                                    <div style="font-size:22px;font-weight:800;color:var(--text-main);">18 ед.</div>
+                                <div class="col-4">
+                                    <div class="dash-stat-card text-center py-2">
+                                        <div class="dash-stat-label">Норма</div>
+                                        <div class="medicine-stat-value" id="insulinNorm">0 ед.</div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-4">
-                                <div class="dash-stat-card text-center py-2">
-                                    <div class="dash-stat-label">Введено</div>
-                                    <div style="font-size:22px;font-weight:800;color:var(--accent);">44%</div>
+                                <div class="col-4">
+                                    <div class="dash-stat-card text-center py-2">
+                                        <div class="dash-stat-label">Процент</div>
+                                        <div class="medicine-stat-value medicine-stat-value--accent" id="insulinPercent">0%</div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -121,83 +105,54 @@
             <!-- Таблетки -->
             <div class="col-12 col-lg-6">
                 <div class="card register-card border-0 shadow-lg h-100">
-                    <div class="card-body p-4">
+                    <div class="card-body p-4 medicine-tracker-card-body">
                         <div class="d-flex align-items-start justify-content-between gap-3 mb-4">
                             <div>
                                 <span class="badge dash-badge mb-2">Таблетки</span>
                                 <h5 class="fw-bold mb-0">Таблетированные препараты</h5>
                             </div>
-                            <button class="btn btn-primary btn-sm px-3" type="button" disabled>
+                            <button class="btn btn-primary btn-sm px-3 js-open-pill-modal" type="button">
                                 <i class="bi bi-plus-lg me-1"></i>Добавить
                             </button>
                         </div>
 
-                        <!-- Препарат 1 -->
-                        <div class="med-item">
-                            <div class="med-icon med-icon--pill">
-                                <i class="bi bi-capsule"></i>
-                            </div>
-                            <div class="med-info">
-                                <div class="med-name">Метформин 500 мг</div>
-                                <div class="med-detail">2 раза в день · во время еды</div>
-                            </div>
-                            <div class="med-doses">
-                                <div class="dose-dot taken"><i class="bi bi-check2"></i></div>
-                                <div class="dose-dot">В</div>
-                            </div>
-                        </div>
+                        <div class="medicine-tracker-content">
+                            <div id="pillsList"></div>
 
-                        <!-- Препарат 2 -->
-                        <div class="med-item">
-                            <div class="med-icon med-icon--pill">
-                                <i class="bi bi-capsule"></i>
-                            </div>
-                            <div class="med-info">
-                                <div class="med-name">Росувастатин 10 мг</div>
-                                <div class="med-detail">1 раз в день · вечером</div>
-                            </div>
-                            <div class="med-doses">
-                                <div class="dose-dot">В</div>
-                            </div>
-                        </div>
-
-                        <!-- Препарат 3 -->
-                        <div class="med-item">
-                            <div class="med-icon med-icon--pill">
-                                <i class="bi bi-capsule"></i>
-                            </div>
-                            <div class="med-info">
-                                <div class="med-name">Омега-3 1000 мг</div>
-                                <div class="med-detail">1 раз в день · утром</div>
-                            </div>
-                            <div class="med-doses">
-                                <div class="dose-dot taken"><i class="bi bi-check2"></i></div>
-                            </div>
-                        </div>
-
-                        <button class="add-med-btn" type="button" disabled>
-                            <i class="bi bi-plus-circle" style="color:var(--accent);font-size:16px;"></i>
-                            Добавить таблетированный препарат
-                        </button>
-
-                        <!-- Статистика -->
-                        <div class="row g-2 mt-3">
-                            <div class="col-4">
-                                <div class="dash-stat-card text-center py-2">
-                                    <div class="dash-stat-label">Препаратов</div>
-                                    <div style="font-size:22px;font-weight:800;color:var(--text-main);">3</div>
+                            <div class="insulin-empty-state" id="pillsEmptyState">
+                                <div class="insulin-empty-state__icon">
+                                    <i class="bi bi-capsule"></i>
                                 </div>
+                                <div class="fw-bold mt-2">Пока нет добавленных препаратов</div>
+                                <div class="text-muted small mt-1">Нажмите «Добавить», чтобы внести любые таблетированные препараты.</div>
                             </div>
-                            <div class="col-4">
-                                <div class="dash-stat-card text-center py-2">
-                                    <div class="dash-stat-label">Принято</div>
-                                    <div style="font-size:22px;font-weight:800;color:var(--text-main);">2</div>
+                        </div>
+
+                        <div class="medicine-tracker-footer">
+                            <button class="add-med-btn js-open-pill-modal" type="button">
+                                <i class="bi bi-plus-circle" style="color:var(--accent);font-size:16px;"></i>
+                                Добавить таблетированный препарат
+                            </button>
+
+                            <!-- Статистика -->
+                            <div class="row g-2 mt-3">
+                                <div class="col-4">
+                                    <div class="dash-stat-card text-center py-2">
+                                        <div class="dash-stat-label">Препаратов</div>
+                                        <div class="medicine-stat-value" id="pillsTotal">0</div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-4">
-                                <div class="dash-stat-card text-center py-2">
-                                    <div class="dash-stat-label">Осталось</div>
-                                    <div style="font-size:22px;font-weight:800;color:var(--accent);">2</div>
+                                <div class="col-4">
+                                    <div class="dash-stat-card text-center py-2">
+                                        <div class="dash-stat-label">Принято</div>
+                                        <div class="medicine-stat-value" id="pillsTaken">0</div>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="dash-stat-card text-center py-2">
+                                        <div class="dash-stat-label">Осталось</div>
+                                        <div class="medicine-stat-value medicine-stat-value--accent" id="pillsRemaining">0</div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -217,62 +172,60 @@
                         <span class="badge dash-badge mb-2">Аналитика</span>
                         <h5 class="fw-bold mb-0">Динамика глюкозы за 2 недели</h5>
                         <p class="mb-0 mt-1" style="font-size:.85rem;color:var(--text-muted);">
-                            В будущем заменится на Chart.js. Норма: 3.9–7.0 ммоль/л
+                            Норма: 3.9–7.0 ммоль/л
                         </p>
                     </div>
-                    <div class="d-flex gap-3 align-items-center flex-wrap">
-                        <div class="d-flex flex-column gap-1" style="min-width:120px;">
-                            <div class="d-flex justify-content-between" style="font-size:12px;">
-                                <span style="color:var(--text-muted);">В норме</span>
-                                <span style="color:var(--accent);font-weight:700;">71%</span>
-                            </div>
-                            <div class="range-bar-wrap">
-                                <div class="range-bar-fill" style="width:71%;background:var(--accent);"></div>
-                            </div>
+                    <button class="btn btn-primary btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#glucoseModal">
+                        <i class="bi bi-plus-lg me-1"></i>Добавить замер
+                    </button>
+                </div>
+
+                <!-- Статистика диапазонов -->
+                <div class="d-flex gap-3 align-items-center flex-wrap mb-4">
+                    <div class="d-flex flex-column gap-1" style="min-width:120px;">
+                        <div class="d-flex justify-content-between" style="font-size:12px;">
+                            <span style="color:var(--text-muted);">В норме</span>
+                            <span style="color:var(--accent);font-weight:700;" id="glucoseInRange">0%</span>
                         </div>
-                        <div class="d-flex flex-column gap-1" style="min-width:120px;">
-                            <div class="d-flex justify-content-between" style="font-size:12px;">
-                                <span style="color:var(--text-muted);">Выше нормы</span>
-                                <span style="color:#f87171;font-weight:700;">22%</span>
-                            </div>
-                            <div class="range-bar-wrap">
-                                <div class="range-bar-fill" style="width:22%;background:#f87171;"></div>
-                            </div>
+                        <div class="range-bar-wrap">
+                            <div class="range-bar-fill" id="glucoseInRangeBar" style="width:0%;background:var(--accent);"></div>
                         </div>
-                        <div class="d-flex flex-column gap-1" style="min-width:120px;">
-                            <div class="d-flex justify-content-between" style="font-size:12px;">
-                                <span style="color:var(--text-muted);">Ниже нормы</span>
-                                <span style="color:#facc15;font-weight:700;">7%</span>
-                            </div>
-                            <div class="range-bar-wrap">
-                                <div class="range-bar-fill" style="width:7%;background:#facc15;"></div>
-                            </div>
+                    </div>
+                    <div class="d-flex flex-column gap-1" style="min-width:120px;">
+                        <div class="d-flex justify-content-between" style="font-size:12px;">
+                            <span style="color:var(--text-muted);">Выше нормы</span>
+                            <span style="color:#f87171;font-weight:700;" id="glucoseAbove">0%</span>
+                        </div>
+                        <div class="range-bar-wrap">
+                            <div class="range-bar-fill" id="glucoseAboveBar" style="width:0%;background:#f87171;"></div>
+                        </div>
+                    </div>
+                    <div class="d-flex flex-column gap-1" style="min-width:120px;">
+                        <div class="d-flex justify-content-between" style="font-size:12px;">
+                            <span style="color:var(--text-muted);">Ниже нормы</span>
+                            <span style="color:#facc15;font-weight:700;" id="glucoseBelow">0%</span>
+                        </div>
+                        <div class="range-bar-wrap">
+                            <div class="range-bar-fill" id="glucoseBelowBar" style="width:0%;background:#facc15;"></div>
                         </div>
                     </div>
                 </div>
 
-                <div class="glucose-chart-wrap mb-2">
-                    <div class="g-bar-col"><span class="g-val">6.1</span><div class="g-bar normal" style="height:55%"></div><span class="g-label">24.02</span></div>
-                    <div class="g-bar-col"><span class="g-val high">8.4</span><div class="g-bar high"   style="height:76%"></div><span class="g-label">25.02</span></div>
-                    <div class="g-bar-col"><span class="g-val">6.8</span><div class="g-bar normal" style="height:62%"></div><span class="g-label">26.02</span></div>
-                    <div class="g-bar-col"><span class="g-val">5.9</span><div class="g-bar normal" style="height:54%"></div><span class="g-label">27.02</span></div>
-                    <div class="g-bar-col"><span class="g-val low">3.4</span><div class="g-bar low"    style="height:31%"></div><span class="g-label">28.02</span></div>
-                    <div class="g-bar-col"><span class="g-val">6.2</span><div class="g-bar normal" style="height:56%"></div><span class="g-label">01.03</span></div>
-                    <div class="g-bar-col"><span class="g-val">7.0</span><div class="g-bar normal" style="height:64%"></div><span class="g-label">02.03</span></div>
-                    <div class="g-bar-col"><span class="g-val high">9.1</span><div class="g-bar high"   style="height:83%"></div><span class="g-label">03.03</span></div>
-                    <div class="g-bar-col"><span class="g-val">6.5</span><div class="g-bar normal" style="height:59%"></div><span class="g-label">04.03</span></div>
-                    <div class="g-bar-col"><span class="g-val">5.7</span><div class="g-bar normal" style="height:52%"></div><span class="g-label">05.03</span></div>
-                    <div class="g-bar-col"><span class="g-val">6.3</span><div class="g-bar normal" style="height:57%"></div><span class="g-label">06.03</span></div>
-                    <div class="g-bar-col"><span class="g-val high">7.8</span><div class="g-bar high"   style="height:71%"></div><span class="g-label">07.03</span></div>
-                    <div class="g-bar-col"><span class="g-val">6.6</span><div class="g-bar normal" style="height:60%"></div><span class="g-label">09.03</span></div>
-                    <div class="g-bar-col"><span class="g-val today">6.8</span><div class="g-bar today"  style="height:62%"></div><span class="g-label" style="color:var(--accent);">Сег.</span></div>
+                <!-- График -->
+                <div style="height: 200px; position: relative;">
+                    <canvas id="glucoseChart"></canvas>
+                </div>
+                <div id="glucoseChartEmpty" style="display:none; text-align:center; padding:40px 20px; color:var(--text-muted);">
+                    <i class="bi bi-graph-up" style="font-size:48px; opacity:0.3; margin-bottom:12px; display:block;"></i>
+                    <div>Нет данных для отображения</div>
+                    <div style="font-size:13px; margin-top:8px;">Добавьте первый замер глюкозы</div>
                 </div>
 
-                <div class="glucose-legend">
+                <!-- Легенда -->
+                <div class="glucose-legend mt-3">
                     <div class="gl-item"><span class="gl-dot" style="background:var(--accent);"></span>В норме (3.9–7.0)</div>
                     <div class="gl-item"><span class="gl-dot" style="background:#f87171;"></span>Выше нормы</div>
                     <div class="gl-item"><span class="gl-dot" style="background:#facc15;"></span>Ниже нормы</div>
-                    <div class="gl-item"><span class="gl-dot" style="background:linear-gradient(180deg,#a78bfa,#8b5cf6);"></span>Сегодня</div>
                 </div>
             </div>
         </div>
@@ -289,11 +242,19 @@
                         <div class="d-flex align-items-center justify-content-between gap-3 mb-4">
                             <div>
                                 <span class="badge dash-badge mb-2">Календарь</span>
-                                <h5 class="fw-bold mb-0">Март 2026</h5>
+                                <h5 class="fw-bold mb-0" id="calendarTitle">Март 2026</h5>
                             </div>
-                            <button class="btn btn-primary btn-sm px-3" type="button" disabled>
-                                <i class="bi bi-plus-lg me-1"></i>Добавить событие
-                            </button>
+                            <div class="d-flex gap-2">
+                                <button class="btn btn-sm btn-secondary" type="button" id="prevMonthBtn">
+                                    <i class="bi bi-chevron-left"></i>
+                                </button>
+                                <button class="btn btn-sm btn-secondary" type="button" id="todayBtn">
+                                    Сегодня
+                                </button>
+                                <button class="btn btn-sm btn-secondary" type="button" id="nextMonthBtn">
+                                    <i class="bi bi-chevron-right"></i>
+                                </button>
+                            </div>
                         </div>
 
                         <!-- Дни недели -->
@@ -307,79 +268,9 @@
                             <div class="cal-day-name">Вс</div>
                         </div>
 
-                        <!-- Дни месяца (март 2026 начинается с воскресенья → 1-е на 7-й позиции) -->
-                        <div class="cal-grid">
-                            <!-- Пустые (февраль) -->
-                            <div class="cal-day other-month">23</div>
-                            <div class="cal-day other-month">24</div>
-                            <div class="cal-day other-month">25</div>
-                            <div class="cal-day other-month">26</div>
-                            <div class="cal-day other-month">27</div>
-                            <div class="cal-day other-month">28</div>
-                            <!-- 1 марта — воскресенье -->
-                            <div class="cal-day">1</div>
-
-                            <div class="cal-day">2</div>
-                            <div class="cal-day has-event">3
-                                <div class="cal-event-dots"><span class="cal-event-dot dot-pill"></span></div>
-                            </div>
-                            <div class="cal-day">4</div>
-                            <div class="cal-day has-event">5
-                                <div class="cal-event-dots"><span class="cal-event-dot dot-dose"></span></div>
-                            </div>
-                            <div class="cal-day">6</div>
-                            <div class="cal-day">7</div>
-                            <div class="cal-day has-appointment" style="border-color:rgba(248,113,113,.4);">8
-                                <div class="cal-event-dots"><span class="cal-event-dot dot-doctor"></span></div>
-                            </div>
-
-                            <div class="cal-day">9</div>
-                            <div class="cal-day today-cal">10
-                                <div class="cal-event-dots">
-                                    <span class="cal-event-dot dot-pill"></span>
-                                    <span class="cal-event-dot dot-dose"></span>
-                                </div>
-                            </div>
-                            <div class="cal-day">11</div>
-                            <div class="cal-day">12</div>
-                            <div class="cal-day has-event">13
-                                <div class="cal-event-dots"><span class="cal-event-dot dot-pill"></span></div>
-                            </div>
-                            <div class="cal-day">14</div>
-                            <div class="cal-day">15</div>
-
-                            <div class="cal-day">16</div>
-                            <div class="cal-day has-event">17
-                                <div class="cal-event-dots"><span class="cal-event-dot dot-dose"></span></div>
-                            </div>
-                            <div class="cal-day">18</div>
-                            <div class="cal-day has-appointment">19
-                                <div class="cal-event-dots"><span class="cal-event-dot dot-doctor"></span></div>
-                            </div>
-                            <div class="cal-day">20</div>
-                            <div class="cal-day">21</div>
-                            <div class="cal-day">22</div>
-
-                            <div class="cal-day">23</div>
-                            <div class="cal-day">24</div>
-                            <div class="cal-day has-event">25
-                                <div class="cal-event-dots"><span class="cal-event-dot dot-pill"></span></div>
-                            </div>
-                            <div class="cal-day">26</div>
-                            <div class="cal-day">27</div>
-                            <div class="cal-day">28</div>
-                            <div class="cal-day">29</div>
-
-                            <div class="cal-day has-event">30
-                                <div class="cal-event-dots"><span class="cal-event-dot dot-dose"></span></div>
-                            </div>
-                            <div class="cal-day">31</div>
-                            <!-- Пустые (апрель) -->
-                            <div class="cal-day other-month">1</div>
-                            <div class="cal-day other-month">2</div>
-                            <div class="cal-day other-month">3</div>
-                            <div class="cal-day other-month">4</div>
-                            <div class="cal-day other-month">5</div>
+                        <!-- Дни месяца -->
+                        <div class="cal-grid" id="calendarGrid">
+                            <!-- Генерируется JS -->
                         </div>
 
                         <!-- Легенда -->
@@ -399,47 +290,11 @@
                         <span class="badge dash-badge mb-2">События</span>
                         <h5 class="fw-bold mb-4">Ближайшие события</h5>
 
-                        <div class="event-item">
-                            <div class="event-icon event-icon--pill">
-                                <i class="bi bi-capsule-pill"></i>
-                            </div>
-                            <div>
-                                <div class="event-title">Новый препарат</div>
-                                <div class="event-sub">13 марта · Добавить Берлитион 300</div>
-                            </div>
+                        <div id="eventsList" style="flex: 1; overflow-y: auto;">
+                            <!-- Генерируется JS -->
                         </div>
 
-                        <div class="event-item">
-                            <div class="event-icon event-icon--doctor">
-                                <i class="bi bi-hospital"></i>
-                            </div>
-                            <div>
-                                <div class="event-title">Приём у эндокринолога</div>
-                                <div class="event-sub">19 марта · 11:00 · Проверка HbA1c</div>
-                            </div>
-                        </div>
-
-                        <div class="event-item">
-                            <div class="event-icon event-icon--dose">
-                                <i class="bi bi-droplet-half"></i>
-                            </div>
-                            <div>
-                                <div class="event-title">Пересмотр дозы инсулина</div>
-                                <div class="event-sub">25 марта · Корректировка по результатам</div>
-                            </div>
-                        </div>
-
-                        <div class="event-item">
-                            <div class="event-icon event-icon--dose">
-                                <i class="bi bi-arrow-repeat"></i>
-                            </div>
-                            <div>
-                                <div class="event-title">Плановый пересмотр терапии</div>
-                                <div class="event-sub">30 марта · Совместно с врачом</div>
-                            </div>
-                        </div>
-
-                        <button class="btn btn-primary w-100 mt-auto pt-3" type="button" disabled>
+                        <button class="btn btn-primary w-100 mt-auto pt-3 js-open-event-modal" type="button">
                             <i class="bi bi-calendar-plus me-1"></i>Добавить событие в календарь
                         </button>
                     </div>
@@ -447,8 +302,167 @@
             </div>
 
         </div>
+
     </main>
 
+    <div class="modal fade" id="insulinModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content medicine-modal">
+                <div class="modal-header border-bottom-0">
+                    <div>
+                        <h5 class="modal-title fw-bold mb-1">Добавить инсулин</h5>
+                        <div class="text-muted small">Заполните данные препарата и количество приёмов на день.</div>
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form id="insulinForm">
+                    <div class="modal-body pt-0">
+                        <div class="mb-3">
+                            <label for="insulinName" class="form-label">Название препарата</label>
+                            <input type="text" class="form-control" id="insulinName" placeholder="Например, Новорапид ФлексПен" required>
+                        </div>
+                        <div class="row g-3">
+                            <div class="col-12 col-md-6">
+                                <label for="insulinType" class="form-label">Тип инсулина</label>
+                                <select class="form-select" id="insulinType" required>
+                                    <option value="short">Короткий</option>
+                                    <option value="long">Длинный</option>
+                                </select>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <label for="insulinUnits" class="form-label">Количество единиц</label>
+                                <input type="number" class="form-control" id="insulinUnits" min="1" step="1" value="4" required>
+                            </div>
+                            <div class="col-12">
+                                <label for="insulinDoses" class="form-label">Сколько раз в день</label>
+                                <input type="number" class="form-control" id="insulinDoses" min="1" max="8" step="1" value="1" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer border-top-0 pt-0">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
+                        <button type="submit" class="btn btn-primary">Сохранить</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="pillModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content medicine-modal">
+                <div class="modal-header border-bottom-0">
+                    <div>
+                        <h5 class="modal-title fw-bold mb-1">Добавить таблетку</h5>
+                        <div class="text-muted small">Заполните название препарата и количество приёмов на день.</div>
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form id="pillForm">
+                    <div class="modal-body pt-0">
+                        <div class="mb-3">
+                            <label for="pillName" class="form-label">Название препарата</label>
+                            <input type="text" class="form-control" id="pillName" placeholder="Например, Метформин 500 мг" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="pillDoses" class="form-label">Сколько раз в день</label>
+                            <input type="number" class="form-control" id="pillDoses" min="1" max="8" step="1" value="1" required>
+                        </div>
+                    </div>
+                    <div class="modal-footer border-top-0 pt-0">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
+                        <button type="submit" class="btn btn-primary">Сохранить</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- Модальное окно добавления события -->
+    <div class="modal fade" id="eventModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content medicine-modal">
+                <div class="modal-header border-bottom-0">
+                    <div>
+                        <h5 class="modal-title fw-bold mb-1">Добавить событие</h5>
+                        <div class="text-muted small">Выберите тип события и укажите детали.</div>
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form id="eventForm">
+                    <div class="modal-body pt-0">
+                        <div class="mb-3">
+                            <label for="eventType" class="form-label">Тип события</label>
+                            <select class="form-select" id="eventType" required>
+                                <option value="pill">Новый препарат</option>
+                                <option value="dose">Изменение дозы</option>
+                                <option value="doctor">Приём у врача</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="eventTitle" class="form-label">Название события</label>
+                            <input type="text" class="form-control" id="eventTitle" placeholder="Например, Добавить Метформин" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="eventDate" class="form-label">Дата</label>
+                            <input type="date" class="form-control" id="eventDate" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="eventDescription" class="form-label">Описание (необязательно)</label>
+                            <textarea class="form-control" id="eventDescription" rows="2" placeholder="Дополнительная информация"></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer border-top-0 pt-0">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
+                        <button type="submit" class="btn btn-primary">Сохранить</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- Модальное окно добавления глюкозы -->
+    <div class="modal fade" id="glucoseModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content medicine-modal">
+                <div class="modal-header border-bottom-0">
+                    <div>
+                        <h5 class="modal-title fw-bold mb-1">Добавить замер глюкозы</h5>
+                        <div class="text-muted small">Укажите текущий уровень глюкозы в крови.</div>
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form id="glucoseForm">
+                    <div class="modal-body pt-0">
+                        <div class="mb-3">
+                            <label for="glucoseValue" class="form-label">Уровень глюкозы (ммоль/л)</label>
+                            <input type="number" class="form-control" id="glucoseValue" step="0.1" min="0.1" max="30" placeholder="6.5" required>
+                        </div>
+                        <div class="row g-3">
+                            <div class="col-12 col-md-6">
+                                <label for="glucoseDate" class="form-label">Дата</label>
+                                <input type="date" class="form-control" id="glucoseDate" required>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <label for="glucoseTime" class="form-label">Время</label>
+                                <input type="time" class="form-control" id="glucoseTime" required>
+                            </div>
+                        </div>
+                        <div class="mb-3 mt-3">
+                            <label for="glucoseNote" class="form-label">Заметка (необязательно)</label>
+                            <textarea class="form-control" id="glucoseNote" rows="2" placeholder="Натощак / после еды / перед сном"></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer border-top-0 pt-0">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
+                        <button type="submit" class="btn btn-primary">Сохранить</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/calendar.js"></script>
+    <script src="../js/medicines.js"></script>
 </body>
 </html>
 

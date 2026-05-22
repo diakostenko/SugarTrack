@@ -22,7 +22,7 @@ function getTokenFromCookie(cookieHeader) {
     return null;
 }
 
-export function requireAuth(req, res, next) {
+export async function requireAuth(req, res, next) {
     const tokenFromCookie = getTokenFromCookie(req.headers.cookie);
     const authHeader = req.headers.authorization;
     const tokenFromHeader = authHeader?.startsWith('Bearer ')
@@ -31,24 +31,48 @@ export function requireAuth(req, res, next) {
 
     const token = tokenFromCookie || tokenFromHeader;
 
+    console.log('requireAuth: токен из cookie:', tokenFromCookie ? 'найден' : 'не найден');
+    console.log('requireAuth: токен из header:', tokenFromHeader ? 'найден' : 'не найден');
+
     if (!token) {
-        return res.redirect('/auth/login');
+        console.log('requireAuth: токен отсутствует');
+        return res.status(401).json({ error: 'Токен не предоставлен' });
     }
 
     try {
-        req.user = jwt.verify(token, JWT_SECRET);
+        const decoded = jwt.verify(token, JWT_SECRET);
+
+        req.user = {
+            userId: decoded.userId,
+            email: decoded.email,
+            userType: decoded.userType
+        };
+
+        console.log('requireAuth: пользователь авторизован:', req.user.userId, req.user.userType);
         return next();
-    } catch {
-        return res.redirect('/auth/login');
+    } catch (error) {
+        console.error('requireAuth: ошибка аутентификации:', error.message);
+        return res.status(401).json({ error: 'Неверный токен' });
     }
 }
 
 export function requireUserType(expectedType) {
     return (req, res, next) => {
-        if (req.user?.userType !== expectedType) {
-            return res.redirect('/auth/login');
+        if (!req.user) {
+            console.log('requireUserType: пользователь не авторизован');
+            return res.status(401).json({ error: 'Не авторизован' });
         }
+
+        if (req.user.userType !== expectedType) {
+            console.log(`requireUserType: ожидался ${expectedType}, получен ${req.user.userType}`);
+            return res.status(403).json({ error: 'Доступ запрещен' });
+        }
+
+        console.log(`requireUserType: тип ${expectedType} подтверждён`);
         return next();
     };
 }
 
+// Алиасы для API роутов (для совместимости)
+export const requireAuthAPI = requireAuth;
+export const requireUserTypeAPI = requireUserType;
