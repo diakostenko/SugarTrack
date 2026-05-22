@@ -12,177 +12,159 @@
 </head>
 <body>
 
-	<nav class="navbar px-3 px-md-4 py-3 mb-4 dashboard-navbar">
-		<a href="dashboard.html" class="d-flex align-items-center gap-3 text-decoration-none">
-			<div class="brand-icon">E</div>
-			<div>
-				<div class="brand-sup">SugarTrack</div>
-				<div class="brand-name">Главная — Эмоциональный трекер</div>
-			</div>
+<nav class="navbar px-3 px-md-4 py-3 mb-4 dashboard-navbar">
+	<a href="dashboard.html" class="d-flex align-items-center gap-3 text-decoration-none">
+		<div class="brand-icon">E</div>
+		<div>
+			<div class="brand-sup">SugarTrack</div>
+			<div class="brand-name">Главная — Эмоциональный трекер</div>
+		</div>
+	</a>
+	<div class="d-flex flex-wrap gap-2">
+		<a href="emodiary.html" class="btn btn-sm nav-pill">
+			<i class="bi bi-journal-heart me-1"></i>Эмо-дневник
 		</a>
-		<div class="d-flex flex-wrap gap-2">
-			<a href="emodiary.html" class="btn btn-sm nav-pill">
-				<i class="bi bi-journal-heart me-1"></i>Эмо-дневник
-			</a>
-			<a href="emergencyhelp.html" class="btn btn-sm nav-pill">
-				<i class="bi bi-life-preserver me-1"></i>Срочная помощь
-			</a>
-			<a href="profile.html" class="btn btn-sm nav-pill">
-				<i class="bi bi-person me-1"></i>Профиль
-			</a>
-		</div>
-	</nav>
+		<a href="emergencyhelp.html" class="btn btn-sm nav-pill">
+			<i class="bi bi-life-preserver me-1"></i>Срочная помощь
+		</a>
+		<a href="profile.html" class="btn btn-sm nav-pill">
+			<i class="bi bi-person me-1"></i>Профиль
+		</a>
+	</div>
+</nav>
 
-	<main class="container-xxl px-3 px-md-4 pb-5 ed-dashboard">
+<main class="container-xxl px-3 px-md-4 pb-5 ed-dashboard">
 
-		<div class="card register-card border-0 shadow-lg mb-4">
-			<div class="card-body p-4 p-md-5">
-				<div class="row align-items-center g-4">
-					<div class="col-12 col-lg-7">
-						<span class="badge dash-badge mb-3">Обзор дня</span>
-						<h2 class="fw-bold mb-3 ed-heading" style="font-size:2rem;">Дружелюбное пространство для эмоций и приёмов пищи</h2>
-						<p style="color:var(--text-main);">
-							Отмечай, как прошли завтрак, обед, ужин и перекусы, сохраняй мысли для эмоционального дневника и следи за визуализацией состояния.
-						</p>
-						<div class="d-flex flex-wrap gap-2 mt-4">
-							<button class="btn btn-primary" type="button" disabled>
-								<i class="bi bi-plus-circle me-1"></i>Добавить запись
-							</button>
-							<button class="btn btn-outline-secondary" type="button" disabled>
-								<i class="bi bi-chat-heart me-1"></i>Открыть подсказку
-							</button>
-						</div>
-					</div>
-					<div class="col-12 col-lg-5">
-						<div class="ed-quote-card h-100 d-flex flex-column justify-content-between">
-							<div>
-								<span class="badge dash-badge mb-3">Цитата дня</span>
-								<div id="daily-quote" class="ed-quote-text mb-3">Загрузка цитаты...</div>
-								<div id="daily-quote-author" style="color:var(--text-muted);font-size:.9rem;"> </div>
-							</div>
-							<div class="d-flex flex-wrap gap-2">
-								<button id="refresh-quote-btn" class="btn btn-sm btn-outline-secondary" type="button">
-									<i class="bi bi-arrow-repeat me-1"></i>Сменить цитату
-								</button>
-							</div>
-						</div>
+	<!-- ════════════════════════════════════════════════ -->
+	<!-- ОБЗОР ДНЯ -->
+	<!-- ════════════════════════════════════════════════ -->
+	<div class="card register-card border-0 shadow-lg mb-4">
+		<div class="card-body p-4 p-md-5">
+			<div class="row align-items-center g-4">
+				<div class="col-12 col-lg-7">
+					<span class="badge dash-badge mb-3">Обзор дня</span>
+					<h2 class="fw-bold mb-3 ed-heading" style="font-size:2rem;">Дружелюбное пространство для эмоций и приёмов пищи</h2>
+					<p style="color:var(--text-main);">
+						Отмечай, как прошли завтрак, обед, ужин и перекусы, сохраняй мысли для эмоционального дневника и следи за визуализацией состояния.
+					</p>
+					<div class="d-flex flex-wrap gap-2 mt-4">
+						<a href="emodiary.html" class="btn btn-primary">
+							<i class="bi bi-plus-circle me-1"></i>Добавить запись
+						</a>
+						<a href="emergencyhelp.html" class="btn btn-outline-secondary">
+							<i class="bi bi-chat-heart me-1"></i>Открыть подсказку
+						</a>
 					</div>
 				</div>
-			</div>
-		</div>
-
-		<div class="row g-4 mb-4">
-			<div class="col-12">
-				<div class="card register-card border-0 shadow-lg h-100">
-					<div class="card-body p-4 p-md-5">
-						<span class="badge dash-badge mb-2">Питание</span>
-						<h5 class="fw-bold mb-3 ed-heading">Оценка приёмов пищи</h5>
-						<p class="mb-4" style="color:var(--text-main);opacity:.88;">
-							Для каждого приёма пищи выбери, как он ощущался: хорошо, нормально или плохо.
-						</p>
-						<div class="row g-3">
-							<div class="col-12 col-md-6 col-xl-3">
-								<div class="ed-meal-card">
-									<div class="ed-meal-title">Завтрак</div>
-									<div class="ed-meal-sub">Как себя ощущаешь после утреннего приёма пищи?</div>
-									<div class="ed-choice-row">
-										<button class="btn ed-choice-good" type="button">Хорошо</button>
-										<button class="btn ed-choice-normal" type="button">Нормально</button>
-										<button class="btn ed-choice-bad" type="button">Плохо</button>
-									</div>
-								</div>
-							</div>
-							<div class="col-12 col-md-6 col-xl-3">
-								<div class="ed-meal-card">
-									<div class="ed-meal-title">Обед</div>
-									<div class="ed-meal-sub">Отметь настроение и комфорт после обеда.</div>
-									<div class="ed-choice-row">
-										<button class="btn ed-choice-good" type="button">Хорошо</button>
-										<button class="btn ed-choice-normal" type="button">Нормально</button>
-										<button class="btn ed-choice-bad" type="button">Плохо</button>
-									</div>
-								</div>
-							</div>
-							<div class="col-12 col-md-6 col-xl-3">
-								<div class="ed-meal-card">
-									<div class="ed-meal-title">Ужин</div>
-									<div class="ed-meal-sub">Собери вечернюю оценку без давления.</div>
-									<div class="ed-choice-row">
-										<button class="btn ed-choice-good" type="button">Хорошо</button>
-										<button class="btn ed-choice-normal" type="button">Нормально</button>
-										<button class="btn ed-choice-bad" type="button">Плохо</button>
-									</div>
-								</div>
-							</div>
-							<div class="col-12 col-md-6 col-xl-3">
-								<div class="ed-meal-card">
-									<div class="ed-meal-title">Перекусы</div>
-									<div class="ed-meal-sub">Подойдёт для маленьких приёмов пищи и пауз между делами.</div>
-									<div class="ed-choice-row">
-										<button class="btn ed-choice-good" type="button">Хорошо</button>
-										<button class="btn ed-choice-normal" type="button">Нормально</button>
-										<button class="btn ed-choice-bad" type="button">Плохо</button>
-									</div>
-								</div>
-							</div>
+				<div class="col-12 col-lg-5">
+					<div class="ed-quote-card h-100 d-flex flex-column justify-content-between">
+						<div>
+							<span class="badge dash-badge mb-3">Цитата дня</span>
+							<div id="daily-quote" class="ed-quote-text mb-3">Загрузка цитаты...</div>
+							<div id="daily-quote-author" style="color:var(--text-muted);font-size:.9rem;"> </div>
 						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<div class="row g-4 mb-4">
-			<div class="col-12 col-lg-6">
-				<div class="card register-card border-0 shadow-lg h-100">
-					<div class="card-body p-4 p-md-5">
-						<span class="badge dash-badge mb-2">Заметка</span>
-						<h5 class="fw-bold mb-3 ed-heading">Оставить запись для эмоционального дневника</h5>
-						<label for="ed-note" class="form-label visually-hidden">Заметка для эмоционального дневника
-						</label>
-						<textarea id="ed-note" class="form-control ed-note-textarea mb-3" rows="6" placeholder="Например: после встречи стало тревожно, хочу вернуться к этому вечером..."></textarea>
 						<div class="d-flex flex-wrap gap-2">
-							<button class="btn btn-primary" type="button" disabled>
-								<i class="bi bi-send me-1"></i>Сохранить заметку
-							</button>
-							<button class="btn btn-outline-secondary" type="button" disabled>
-								<i class="bi bi-folder2-open me-1"></i>Открыть прошлые записи
+							<button id="refresh-quote-btn" class="btn btn-sm btn-outline-secondary" type="button">
+								<i class="bi bi-arrow-repeat me-1"></i>Сменить цитату
 							</button>
 						</div>
 					</div>
 				</div>
 			</div>
+		</div>
+	</div>
 
-			<div class="col-12 col-lg-6">
-				<div class="card register-card border-0 shadow-lg h-100">
-					<div class="card-body p-4 p-md-5">
-						<span class="badge dash-badge mb-2">Эмоциональная диаграмма</span>
-						<h5 class="fw-bold mb-3 ed-heading">Статичная визуализация состояния</h5>
-						<div class="ed-chart-wrap mb-3">
-							<div class="ed-chart-bars mb-3">
-								<span style="height:40%"></span>
-								<span style="height:56%"></span>
-								<span style="height:48%"></span>
-								<span style="height:70%"></span>
-								<span style="height:60%"></span>
-								<span style="height:44%"></span>
-								<span style="height:62%"></span>
+	<!-- ════════════════════════════════════════════════ -->
+	<!-- НЕДЕЛЬНАЯ СТАТИСТИКА ЭМОЦИЙ -->
+	<!-- ════════════════════════════════════════════════ -->
+	<div class="row g-4 mb-4">
+		<div class="col-12">
+			<div class="card register-card border-0 shadow-lg h-100">
+				<div class="card-body p-4 p-md-5">
+					<span class="badge dash-badge mb-2">Статистика</span>
+					<h5 class="fw-bold mb-3 ed-heading">Твоя неделя в цифрах</h5>
+					<p class="mb-4" style="color:var(--text-main);opacity:.88;">
+						Посмотри, сколько приёмов пищи ты оценил(а) и какое настроение преобладало.
+					</p>
+					<div class="row g-3">
+						<div class="col-6 col-md-3">
+							<div class="dash-stat-card">
+								<div class="dash-stat-label">Всего записей</div>
+								<div class="dash-stat-value" id="stat-total">—</div>
+								<div class="dash-stat-unit">за 7 дней</div>
 							</div>
-							<div class="d-flex justify-content-between ed-chart-labels mb-3">
-								<span>Пн</span><span>Вт</span><span>Ср</span><span>Чт</span><span>Пт</span><span>Сб</span><span>Вс</span>
+						</div>
+						<div class="col-6 col-md-3">
+							<div class="dash-stat-card">
+								<div class="dash-stat-label">Хорошо</div>
+								<div class="dash-stat-value" id="stat-good">—</div>
+								<div class="dash-stat-unit">оценок</div>
 							</div>
-							<div class="ed-legend">
-								<span class="ed-legend-chip">спокойно</span>
-								<span class="ed-legend-chip">ровно</span>
-								<span class="ed-legend-chip">есть напряжение</span>
-								<span class="ed-legend-chip">нужна поддержка</span>
+						</div>
+						<div class="col-6 col-md-3">
+							<div class="dash-stat-card">
+								<div class="dash-stat-label">Нормально</div>
+								<div class="dash-stat-value" id="stat-normal">—</div>
+								<div class="dash-stat-unit">оценок</div>
+							</div>
+						</div>
+						<div class="col-6 col-md-3">
+							<div class="dash-stat-card">
+								<div class="dash-stat-label">Плохо</div>
+								<div class="dash-stat-value" id="stat-bad">—</div>
+								<div class="dash-stat-unit">оценок</div>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	</main>
+	</div>
+
+	<!-- ════════════════════════════════════════════════ -->
+	<!-- БЫСТРЫЕ ДЕЙСТВИЯ -->
+	<!-- ════════════════════════════════════════════════ -->
+	<div class="row g-4 mb-4">
+		<div class="col-12">
+			<div class="card register-card border-0 shadow-lg h-100">
+				<div class="card-body p-4 p-md-5">
+					<span class="badge dash-badge mb-2">Быстрые действия</span>
+					<h5 class="fw-bold mb-3 ed-heading">Что ты можешь сделать прямо сейчас</h5>
+					<div class="row g-3">
+						<div class="col-12 col-md-6 col-lg-3">
+							<a href="emodiary.html" class="dash-action-card">
+								<i class="bi bi-journal-text dash-action-icon"></i>
+								<div class="dash-action-title">Оценить приём пищи</div>
+								<div class="dash-action-text">Добавь оценку завтрака, обеда, ужина или перекуса</div>
+							</a>
+						</div>
+						<div class="col-12 col-md-6 col-lg-3">
+							<a href="emergencyhelp.html" class="dash-action-card">
+								<i class="bi bi-heart-pulse dash-action-icon"></i>
+								<div class="dash-action-title">Срочная помощь</div>
+								<div class="dash-action-text">Советы и техники для сложных моментов</div>
+							</a>
+						</div>
+						<div class="col-12 col-md-6 col-lg-3">
+							<a href="profile.html" class="dash-action-card">
+								<i class="bi bi-gear dash-action-icon"></i>
+								<div class="dash-action-title">Настройки</div>
+								<div class="dash-action-text">Обнови цели и предпочтения</div>
+							</a>
+						</div>
+						<div class="col-12 col-md-6 col-lg-3">
+							<a href="emodiary.html" class="dash-action-card">
+								<i class="bi bi-graph-up dash-action-icon"></i>
+								<div class="dash-action-title">Просмотреть аналитику</div>
+								<div class="dash-action-text">Изучи свои эмоции за месяц</div>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</main>
 </body>
 </html>
-
-

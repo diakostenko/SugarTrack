@@ -63,114 +63,8 @@
 			</div>
 		</div>
 
-		<div class="row g-4 mb-4">
-			<div class="col-12 col-lg-6">
-				<div class="card register-card border-0 shadow-lg h-100">
-					<div class="card-body p-0">
-						<div class="ed-meal-card h-100">
-							<div class="ed-meal-card__header">
-								<div>
-									<div class="badge dash-badge mb-2">Утро</div>
-									<div class="ed-meal-card__title">Завтрак</div>
-								</div>
-								<span class="ed-meal-card__mood">Спокойно</span>
-							</div>
-							<div class="ed-meal-card__body">
-								<div class="ed-meal-card__text">Утро прошло ровно, без сильных скачков настроения. Здесь позже будет связь с эмоциональным дневником и оценкой приёма пищи.</div>
-								<div class="ed-meal-note">
-									<div class="ed-meal-note__label">Короткая заметка</div>
-									<div class="ed-meal-note__value">После завтрака стало легче собраться, но сохранялось лёгкое напряжение перед делами.</div>
-								</div>
-								<div class="ed-meal-actions">
-									<button class="btn btn-primary" type="button" disabled><i class="bi bi-pencil-square me-1"></i>Добавить запись</button>
-									<button class="btn btn-outline-secondary" type="button" disabled><i class="bi bi-chat-dots me-1"></i>Подробнее</button>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<div class="col-12 col-lg-6">
-				<div class="card register-card border-0 shadow-lg h-100">
-					<div class="card-body p-0">
-						<div class="ed-meal-card h-100">
-							<div class="ed-meal-card__header">
-								<div>
-									<div class="badge dash-badge mb-2">День</div>
-									<div class="ed-meal-card__title">Обед</div>
-								</div>
-								<span class="ed-meal-card__mood">Тревожно</span>
-							</div>
-							<div class="ed-meal-card__body">
-								<div class="ed-meal-card__text">В обед появилась усталость и чуть больше эмоций, чем утром. Позже этот блок можно будет связать с подробной карточкой события.</div>
-								<div class="ed-meal-note">
-									<div class="ed-meal-note__label">Короткая заметка</div>
-									<div class="ed-meal-note__value">Хотелось побыть в тишине и сделать паузу перед следующими задачами.</div>
-								</div>
-								<div class="ed-meal-actions">
-									<button class="btn btn-primary" type="button" disabled><i class="bi bi-pencil-square me-1"></i>Добавить запись</button>
-									<button class="btn btn-outline-secondary" type="button" disabled><i class="bi bi-chat-dots me-1"></i>Подробнее</button>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<div class="col-12 col-lg-6">
-				<div class="card register-card border-0 shadow-lg h-100">
-					<div class="card-body p-0">
-						<div class="ed-meal-card h-100">
-							<div class="ed-meal-card__header">
-								<div>
-									<div class="badge dash-badge mb-2">Вечер</div>
-									<div class="ed-meal-card__title">Ужин</div>
-								</div>
-								<span class="ed-meal-card__mood">Ровно</span>
-							</div>
-							<div class="ed-meal-card__body">
-								<div class="ed-meal-card__text">Вечером состояние стабилизировалось. Этот блок позже можно будет связать с отдельными эмоциональными маркерами и записями.</div>
-								<div class="ed-meal-note">
-									<div class="ed-meal-note__label">Короткая заметка</div>
-									<div class="ed-meal-note__value">После ужина стало спокойнее, помогла тихая обстановка и привычный распорядок.</div>
-								</div>
-								<div class="ed-meal-actions">
-									<button class="btn btn-primary" type="button" disabled><i class="bi bi-pencil-square me-1"></i>Добавить запись</button>
-									<button class="btn btn-outline-secondary" type="button" disabled><i class="bi bi-chat-dots me-1"></i>Подробнее</button>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<div class="col-12 col-lg-6">
-				<div class="card register-card border-0 shadow-lg h-100">
-					<div class="card-body p-0">
-						<div class="ed-meal-card h-100">
-							<div class="ed-meal-card__header">
-								<div>
-									<div class="badge dash-badge mb-2">Паузы</div>
-									<div class="ed-meal-card__title">Перекусы</div>
-								</div>
-								<span class="ed-meal-card__mood">Нужна поддержка</span>
-							</div>
-							<div class="ed-meal-card__body">
-								<div class="ed-meal-card__text">Перекусы — удобное место для коротких всплесков эмоций, которые позже можно будет отмечать отдельно.</div>
-								<div class="ed-meal-note">
-									<div class="ed-meal-note__label">Короткая заметка</div>
-									<div class="ed-meal-note__value">В середине дня хотелось отвлечься и взять паузу, чтобы не перегружать себя.</div>
-								</div>
-								<div class="ed-meal-actions">
-									<button class="btn btn-primary" type="button" disabled><i class="bi bi-pencil-square me-1"></i>Добавить запись</button>
-									<button class="btn btn-outline-secondary" type="button" disabled><i class="bi bi-chat-dots me-1"></i>Подробнее</button>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
+		<div class="row g-4 mb-4 meals-container">
+			<!-- Здесь будут рендериться приёмы пищи через JS -->
 		</div>
 
 		<div class="card register-card border-0 shadow-lg">
@@ -178,32 +72,36 @@
 				<div class="d-flex align-items-start justify-content-between flex-wrap gap-3 mb-4">
 					<div>
 						<span class="badge dash-badge mb-2">Аналитика</span>
-						<h5 class="fw-bold mb-0 ed-heading">Трекер эмоций за последний месяц</h5>
+						<h5 class="fw-bold mb-0 ed-heading">Трекер эмоций за последние 30 дней</h5>
 					</div>
-					<span class="ed-heading-subtle small">В будущем — chart.js</span>
 				</div>
 
 				<div class="ed-chart-card mb-3">
-					<div class="ed-chart-wrap mb-3">
-						<span style="height:42%"></span><span style="height:58%"></span><span style="height:48%"></span><span style="height:72%"></span><span style="height:60%"></span><span style="height:66%"></span><span style="height:54%"></span><span style="height:69%"></span><span style="height:44%"></span><span style="height:75%"></span><span style="height:63%"></span><span style="height:57%"></span><span style="height:70%"></span><span style="height:61%"></span><span style="height:64%"></span><span style="height:52%"></span><span style="height:71%"></span><span style="height:67%"></span><span style="height:59%"></span><span style="height:73%"></span><span style="height:46%"></span><span style="height:62%"></span><span style="height:55%"></span><span style="height:68%"></span><span style="height:57%"></span><span style="height:74%"></span><span style="height:49%"></span><span style="height:64%"></span><span style="height:58%"></span><span style="height:70%"></span>
-					</div>
-					<div class="d-flex justify-content-between ed-chart-labels mb-3">
-						<span>1</span><span>5</span><span>10</span><span>15</span><span>20</span><span>25</span><span>30</span>
-					</div>
-					<div class="ed-chart-legend">
-						<span class="ed-legend-chip">спокойствие</span>
-						<span class="ed-legend-chip">напряжение</span>
-						<span class="ed-legend-chip">усталость</span>
-						<span class="ed-legend-chip">подъём</span>
-						<span class="ed-legend-chip">поддержка</span>
-					</div>
+					<canvas id="emotionChart" style="max-height: 300px;"></canvas>
 				</div>
 
-				<p class="mb-0 ed-heading-subtle">Эта диаграмма пока статична и служит только макетом того, как будет выглядеть месячный эмоциональный трекер.</p>
+				<div class="ed-chart-legend mb-3">
+            <span class="ed-legend-chip ed-legend-good">
+                <i class="bi bi-emoji-smile me-1"></i>Хорошо
+            </span>
+					<span class="ed-legend-chip ed-legend-normal">
+                <i class="bi bi-emoji-neutral me-1"></i>Нормально
+            </span>
+					<span class="ed-legend-chip ed-legend-bad">
+                <i class="bi bi-emoji-frown me-1"></i>Плохо
+            </span>
+				</div>
+
+				<p class="mb-0 ed-heading-subtle">
+					Диаграмма показывает твои эмоции по приёмам пищи за последние 30 дней.
+				</p>
 			</div>
 		</div>
 
 	</main>
+	<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="/js/emodiary.js"></script>
 </body>
 </html>
 

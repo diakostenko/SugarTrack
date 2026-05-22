@@ -22,12 +22,21 @@ const mealSchema = new Schema({
     },
     mealType: {
         type: String,
-        enum: ['breakfast', 'lunch', 'dinner', 'snack'],
+        enum: ['breakfast', 'lunch', 'dinner', 'snacks'],
         required: true
     },
     time: {
         type: String,
         required: true
+    },
+    moodRating: {
+        type: String,
+        enum: ['good', 'normal', 'bad'],
+        default: null
+    },
+    note: {
+        type: String,
+        default: ''
     },
     foods: [foodItemSchema],
     totalCalories: { type: Number, default: 0 },
@@ -36,6 +45,8 @@ const mealSchema = new Schema({
     totalFat: { type: Number, default: 0 }
 }, {
     timestamps: true
+
+
 });
 
 mealSchema.pre('save', async function() {
