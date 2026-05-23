@@ -96,7 +96,7 @@ class EmoDiary {
             breakfast: { label: 'Завтрак', badge: 'Утро' },
             lunch: { label: 'Обед', badge: 'День' },
             dinner: { label: 'Ужин', badge: 'Вечер' },
-            snacks: { label: 'Перекусы', badge: 'Паузы' }
+            snacks: { label: 'Перекус', badge: 'Паузы' }
         };
 
         container.innerHTML = Object.entries(mealTypes).map(([type, config]) => {
@@ -462,7 +462,7 @@ class EmoDiary {
                 categoryPercentage: 0.9
             },
             {
-                label: 'Перекусы',
+                label: 'Перекус',
                 data: [],
                 backgroundColor: [],
                 barPercentage: 0.9,
